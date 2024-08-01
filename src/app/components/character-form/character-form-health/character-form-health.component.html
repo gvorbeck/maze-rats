@@ -1,0 +1,10 @@
+<div class="flex flex-column">
+  <label for="health">Health</label>
+  <input
+    id="health"
+    type="number"
+    pInputText
+    [(ngModel)]="health"
+    (ngModelChange)="updateHealth()"
+  />
+</div>

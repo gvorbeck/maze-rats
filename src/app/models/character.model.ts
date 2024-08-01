@@ -1,24 +1,18 @@
 import { InventoryItem } from './inventory-item.model';
 import { Spell } from './spell.model';
 
+export interface Ability {
+  long: string;
+  short: string;
+  value: number;
+}
+
 export interface Character {
   id: string;
   abilities: {
-    str: {
-      long: 'Strength';
-      short: 'STR';
-      value: number;
-    };
-    dex: {
-      long: 'Dexterity';
-      short: 'DEX';
-      value: number;
-    };
-    wil: {
-      long: 'Willpower';
-      short: 'WIL';
-      value: number;
-    };
+    str: Ability;
+    dex: Ability;
+    wil: Ability;
   };
   health: number;
   feature:
@@ -50,3 +44,5 @@ export interface Character {
     spells: Spell[];
   };
 }
+
+export type AbilityKey = keyof Character['abilities'];

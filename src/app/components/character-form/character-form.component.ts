@@ -8,14 +8,15 @@ import {
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
-import { CharacterFormAbilitiesComponent } from '../character-form-abilities/character-form-abilities.component';
-import { CharacterFormHealthComponent } from '../character-form-health/character-form-health.component';
-import { Character } from '../../models/character.model';
+import { Character, AbilityKey } from '../../models/character.model';
+import { CharacterFormAbilitiesComponent } from './character-form-abilities/character-form-abilities.component';
+import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
 
 interface CharacterStepperPanel {
   header: string;
   instruction: string;
   component: Type<any> | null;
+  name: string;
 }
 
 @Component({
@@ -83,62 +84,15 @@ export class CharacterFormComponent implements AfterViewInit {
       instruction:
         "Your PC has 3 abilities: Strength, Dexterity, and Will. Roll 1d to find their starting values, or simply choose a row (with GM permission). You may raise one of your PC's abilities by one point at levels 2, 4, and 6. A PC's abilities may never be raised higher than +4.",
       component: CharacterFormAbilitiesComponent,
+      name: 'abilities',
     },
     {
       header: 'Record Maximum Health',
       instruction: 'Record your maximum health points.',
       component: CharacterFormHealthComponent,
+      name: 'health',
     },
-    {
-      header: 'Choose Starting Feature',
-      instruction: 'Choose one starting feature from the list.',
-      component: null,
-    },
-    {
-      header: 'Roll or Choose Six Items',
-      instruction: 'Roll or choose six items to start with.',
-      component: null,
-    },
-    {
-      header: 'Choose Combat Gear',
-      instruction: 'Choose your combat gear.',
-      component: null,
-    },
-    {
-      header: 'Roll or Create Appearance',
-      instruction: "Roll or create your character's appearance.",
-      component: null,
-    },
-    {
-      header: 'Roll or Create Physical Detail',
-      instruction: 'Roll or create a physical detail for your character.',
-      component: null,
-    },
-    {
-      header: 'Roll or Create Background',
-      instruction: 'Roll or create a background for your character.',
-      component: null,
-    },
-    {
-      header: 'Roll or Create Clothing',
-      instruction: "Roll or create your character's clothing.",
-      component: null,
-    },
-    {
-      header: 'Roll or Create Personality',
-      instruction: 'Roll or create a personality for your character.',
-      component: null,
-    },
-    {
-      header: 'Roll or Create Mannerism',
-      instruction: 'Roll or create a mannerism for your character.',
-      component: null,
-    },
-    {
-      header: 'Record Name',
-      instruction: "Record your character's name.",
-      component: null,
-    },
+    // Add more panels as needed
   ];
 
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef })
@@ -154,25 +108,18 @@ export class CharacterFormComponent implements AfterViewInit {
     this.startingCharacter.abilities.str.value = abilities.str;
     this.startingCharacter.abilities.dex.value = abilities.dex;
     this.startingCharacter.abilities.wil.value = abilities.wil;
-    console.log('startingCharacter', this.startingCharacter);
+    console.log('startingCharacter:', this.startingCharacter);
   }
 
-  loadComponent(panel: CharacterStepperPanel) {
-    this.container.clear();
-    if (panel.component) {
-      const componentRef = this.container.createComponent(panel.component);
-
-      // Check if the component instance has the 'abilitiesChanged' output property
-      if ('abilitiesChanged' in componentRef.instance) {
-        componentRef.instance.abilitiesChanged.subscribe((abilities: any) =>
-          this.onAbilitiesChanged(abilities)
-        );
-      }
+  onAbilityChanged({ stat, value }: { stat: AbilityKey; value: number }) {
+    if (this.startingCharacter.abilities[stat]) {
+      this.startingCharacter.abilities[stat].value = value;
+      console.log('startingCharacter:', this.startingCharacter);
     }
   }
 
-  onStepChange(event: any) {
-    const index = event.index;
-    this.loadComponent(this.stepperPanels[index]);
+  onHealthChanged(health: number) {
+    this.startingCharacter.health = health;
+    console.log('startingCharacter:', this.startingCharacter);
   }
 }
