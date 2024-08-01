@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
-import { Button } from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import { CharacterFormAbilitiesComponent } from '../character-form-abilities/character-form-abilities.component';
 import { Character } from '../../models/character.model';
@@ -8,15 +8,20 @@ import { Character } from '../../models/character.model';
 interface CharacterStepperPanel {
   header: string;
   instruction: string;
-  component: Type<Component> | null;
+  component: Type<any> | null;
 }
 
 @Component({
   selector: 'app-character-form',
   standalone: true,
-  imports: [StepperModule, Button, CommonModule],
+  imports: [
+    StepperModule,
+    ButtonModule,
+    CommonModule,
+    CharacterFormAbilitiesComponent,
+  ],
   templateUrl: './character-form.component.html',
-  styleUrl: './character-form.component.scss',
+  styleUrls: ['./character-form.component.scss'],
 })
 export class CharacterFormComponent {
   startingCharacter: Character = {
@@ -73,58 +78,64 @@ export class CharacterFormComponent {
     },
     {
       header: 'Record Maximum Health',
-      instruction: 'bar',
+      instruction: 'Record your maximum health points.',
       component: null,
     },
     {
       header: 'Choose Starting Feature',
-      instruction: 'bar',
+      instruction: 'Choose one starting feature from the list.',
       component: null,
     },
     {
       header: 'Roll or Choose Six Items',
-      instruction: 'bar',
+      instruction: 'Roll or choose six items to start with.',
       component: null,
     },
     {
       header: 'Choose Combat Gear',
-      instruction: 'bar',
+      instruction: 'Choose your combat gear.',
       component: null,
     },
     {
       header: 'Roll or Create Appearance',
-      instruction: 'bar',
+      instruction: "Roll or create your character's appearance.",
       component: null,
     },
     {
       header: 'Roll or Create Physical Detail',
-      instruction: 'bar',
+      instruction: 'Roll or create a physical detail for your character.',
       component: null,
     },
     {
       header: 'Roll or Create Background',
-      instruction: 'bar',
+      instruction: 'Roll or create a background for your character.',
       component: null,
     },
     {
       header: 'Roll or Create Clothing',
-      instruction: 'bar',
+      instruction: "Roll or create your character's clothing.",
       component: null,
     },
     {
       header: 'Roll or Create Personality',
-      instruction: 'bar',
+      instruction: 'Roll or create a personality for your character.',
       component: null,
     },
     {
       header: 'Roll or Create Mannerism',
-      instruction: 'bar',
+      instruction: 'Roll or create a mannerism for your character.',
       component: null,
     },
     {
       header: 'Record Name',
-      instruction: 'bar',
+      instruction: "Record your character's name.",
       component: null,
     },
   ];
+
+  onAbilitiesChanged(abilities: any) {
+    this.startingCharacter.abilities.str.value = abilities.str;
+    this.startingCharacter.abilities.dex.value = abilities.dex;
+    this.startingCharacter.abilities.wil.value = abilities.wil;
+  }
 }

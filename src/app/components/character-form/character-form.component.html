@@ -6,19 +6,34 @@
         <ng-template
           pTemplate="content"
           let-nextCallback="nextCallback"
+          let-prevCallback="prevCallback"
           let-index="index"
         >
-          <div class="flex flex-column h-12rem">
+          <div class="flex flex-col h-12rem">
             <div
               class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium rounded-md"
             >
               {{ panel.instruction }}
             </div>
-            <ng-container *ngComponentOutlet="panel.component"></ng-container>
+            <ng-container *ngIf="panel.component">
+              <ng-container *ngComponentOutlet="panel.component"></ng-container>
+            </ng-container>
           </div>
-          <div class="flex py-4">
-            <p-button label="Next" (onClick)="nextCallback.emit()" /></div
-        ></ng-template> </p-stepperPanel
-    ></ng-container>
+          <div class="flex py-4 gap-2">
+            <p-button
+              *ngIf="i > 0"
+              label="Back"
+              severity="secondary"
+              (onClick)="prevCallback.emit()"
+            ></p-button>
+            <p-button
+              *ngIf="i < stepperPanels.length - 1"
+              label="Next"
+              (onClick)="nextCallback.emit()"
+            ></p-button>
+          </div>
+        </ng-template>
+      </p-stepperPanel>
+    </ng-container>
   </p-stepper>
 </section>
