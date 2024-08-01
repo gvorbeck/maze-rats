@@ -1,6 +1,6 @@
 <section>
   <h1>Create a New Character</h1>
-  <p-stepper orientation="vertical">
+  <p-stepper orientation="vertical" (activeIndexChange)="onStepChange($event)">
     <ng-container *ngFor="let panel of stepperPanels; let i = index">
       <p-stepperPanel [header]="panel.header">
         <ng-template
