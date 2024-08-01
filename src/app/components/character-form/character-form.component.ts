@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
-import { CharacterFormAbilitiesComponent } from '../character-form-abilities/character-form-abilities.component';
 import { Character } from '../../models/character.model';
-import { CharacterFormHealthComponent } from '../character-form-health/character-form-health.component';
+import { CharacterFormAbilitiesComponent } from './character-form-abilities/character-form-abilities.component';
+import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
 
 interface CharacterStepperPanel {
   header: string;
@@ -20,6 +20,7 @@ interface CharacterStepperPanel {
     ButtonModule,
     CommonModule,
     CharacterFormAbilitiesComponent,
+    CharacterFormHealthComponent,
   ],
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
