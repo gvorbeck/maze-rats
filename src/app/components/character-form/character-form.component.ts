@@ -1,8 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, Type } from '@angular/core';
+import {
+  Component,
+  Type,
+  ViewChild,
+  ViewContainerRef,
+  AfterViewInit,
+} from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import { CharacterFormAbilitiesComponent } from '../character-form-abilities/character-form-abilities.component';
+import { CharacterFormHealthComponent } from '../character-form-health/character-form-health.component';
 import { Character } from '../../models/character.model';
 
 interface CharacterStepperPanel {
@@ -19,11 +26,12 @@ interface CharacterStepperPanel {
     ButtonModule,
     CommonModule,
     CharacterFormAbilitiesComponent,
+    CharacterFormHealthComponent,
   ],
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
 })
-export class CharacterFormComponent {
+export class CharacterFormComponent implements AfterViewInit {
   startingCharacter: Character = {
     id: '',
     abilities: {
@@ -79,7 +87,7 @@ export class CharacterFormComponent {
     {
       header: 'Record Maximum Health',
       instruction: 'Record your maximum health points.',
-      component: null,
+      component: CharacterFormHealthComponent,
     },
     {
       header: 'Choose Starting Feature',
@@ -133,9 +141,38 @@ export class CharacterFormComponent {
     },
   ];
 
+  @ViewChild('dynamicComponentContainer', { read: ViewContainerRef })
+  container!: ViewContainerRef;
+
+  constructor() {}
+
+  ngAfterViewInit() {
+    this.loadComponent(this.stepperPanels[0]);
+  }
+
   onAbilitiesChanged(abilities: any) {
     this.startingCharacter.abilities.str.value = abilities.str;
     this.startingCharacter.abilities.dex.value = abilities.dex;
     this.startingCharacter.abilities.wil.value = abilities.wil;
+    console.log('startingCharacter', this.startingCharacter);
+  }
+
+  loadComponent(panel: CharacterStepperPanel) {
+    this.container.clear();
+    if (panel.component) {
+      const componentRef = this.container.createComponent(panel.component);
+
+      // Check if the component instance has the 'abilitiesChanged' output property
+      if ('abilitiesChanged' in componentRef.instance) {
+        componentRef.instance.abilitiesChanged.subscribe((abilities: any) =>
+          this.onAbilitiesChanged(abilities)
+        );
+      }
+    }
+  }
+
+  onStepChange(event: any) {
+    const index = event.index;
+    this.loadComponent(this.stepperPanels[index]);
   }
 }
