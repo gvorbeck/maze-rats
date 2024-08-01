@@ -9,15 +9,23 @@
           let-prevCallback="prevCallback"
           let-index="index"
         >
-          <div class="flex flex-col h-12rem">
+          <div class="flex flex-column h-12rem">
             <div
               class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium rounded-md"
             >
               {{ panel.instruction }}
             </div>
-            <ng-container *ngIf="panel.component">
-              <ng-container *ngComponentOutlet="panel.component" />
+            <ng-container *ngIf="panel.name === 'abilities'">
+              <app-character-form-abilities
+                (abilitiesChanged)="onAbilitiesChanged($event)"
+              ></app-character-form-abilities>
             </ng-container>
+            <ng-container *ngIf="panel.name === 'health'">
+              <app-character-form-health
+                (healthChanged)="onHealthChanged($event)"
+              ></app-character-form-health>
+            </ng-container>
+            <!-- Add more conditions for other panels -->
           </div>
           <div class="flex py-4 gap-2">
             <p-button

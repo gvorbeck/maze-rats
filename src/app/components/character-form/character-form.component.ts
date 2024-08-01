@@ -10,6 +10,7 @@ interface CharacterStepperPanel {
   header: string;
   instruction: string;
   component: Type<any> | null;
+  name: string;
 }
 
 @Component({
@@ -77,18 +78,26 @@ export class CharacterFormComponent {
       instruction:
         "Your PC has 3 abilities: Strength, Dexterity, and Will. Roll 1d to find their starting values, or simply choose a row (with GM permission). You may raise one of your PC's abilities by one point at levels 2, 4, and 6. A PC's abilities may never be raised higher than +4.",
       component: CharacterFormAbilitiesComponent,
+      name: 'abilities',
     },
     {
       header: 'Record Maximum Health',
       instruction: 'Record your maximum health points.',
       component: CharacterFormHealthComponent,
+      name: 'health',
     },
+    // Add more panels as needed
   ];
 
   onAbilitiesChanged(abilities: any) {
     this.startingCharacter.abilities.str.value = abilities.str;
     this.startingCharacter.abilities.dex.value = abilities.dex;
     this.startingCharacter.abilities.wil.value = abilities.wil;
+    console.log('startingCharacter:', this.startingCharacter);
+  }
+
+  onHealthChanged(health: number) {
+    this.startingCharacter.health = health;
     console.log('startingCharacter:', this.startingCharacter);
   }
 }
