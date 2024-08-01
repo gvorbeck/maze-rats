@@ -3,11 +3,20 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-character-form-abilities',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TableModule, TabViewModule],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    TableModule,
+    TabViewModule,
+    InputNumberModule,
+    FormsModule,
+  ],
   templateUrl: './character-form-abilities.component.html',
   styleUrls: ['./character-form-abilities.component.scss'],
 })
@@ -28,6 +37,8 @@ export class CharacterFormAbilitiesComponent {
   // Holds the selected ability group after a roll
   selectedAbilityGroup: any;
 
+  rollInput: number = 0;
+
   // Function to simulate a d6 roll (returns a number between 1 and 6)
   rollAbility(): number {
     return Math.floor(Math.random() * 6) + 1;
@@ -36,6 +47,7 @@ export class CharacterFormAbilitiesComponent {
   // Rolls a d6, finds the corresponding ability group, and selects it
   rollGroupAbilities() {
     const roll = this.rollAbility();
+    this.rollInput = roll;
     const newAbilities = this.abilityTable.find(
       (ability) => ability.id === roll
     );
@@ -47,8 +59,21 @@ export class CharacterFormAbilitiesComponent {
     }
   }
 
+  // Handles input number changes and updates the selected ability group
+  onRollInputChange(value: number) {
+    this.rollInput = value;
+    const newAbilities = this.abilityTable.find(
+      (ability) => ability.id === value
+    );
+    if (newAbilities) {
+      this.selectedAbilityGroup = newAbilities;
+      this.abilitiesChanged.emit(this.selectedAbilityGroup);
+    }
+  }
+
   // Emits the selected row data when a row is selected
   onRowSelect(event: any) {
+    this.rollInput = event.data.id;
     this.abilitiesChanged.emit(event.data);
   }
 }
