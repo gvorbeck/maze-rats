@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  Type,
-  ViewChild,
-  ViewContainerRef,
-  AfterViewInit,
-} from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import { Character, AbilityKey } from '../../models/character.model';
@@ -32,7 +26,7 @@ interface CharacterStepperPanel {
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
 })
-export class CharacterFormComponent implements AfterViewInit {
+export class CharacterFormComponent {
   startingCharacter: Character = {
     id: '',
     abilities: {
@@ -94,15 +88,6 @@ export class CharacterFormComponent implements AfterViewInit {
     },
     // Add more panels as needed
   ];
-
-  @ViewChild('dynamicComponentContainer', { read: ViewContainerRef })
-  container!: ViewContainerRef;
-
-  constructor() {}
-
-  ngAfterViewInit() {
-    this.loadComponent(this.stepperPanels[0]);
-  }
 
   onAbilitiesChanged(abilities: any) {
     this.startingCharacter.abilities.str.value = abilities.str;
