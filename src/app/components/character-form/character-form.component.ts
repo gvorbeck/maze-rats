@@ -4,6 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import { CharacterFormAbilitiesComponent } from '../character-form-abilities/character-form-abilities.component';
 import { Character } from '../../models/character.model';
+import { CharacterFormHealthComponent } from '../character-form-health/character-form-health.component';
 
 interface CharacterStepperPanel {
   header: string;
@@ -79,57 +80,7 @@ export class CharacterFormComponent {
     {
       header: 'Record Maximum Health',
       instruction: 'Record your maximum health points.',
-      component: null,
-    },
-    {
-      header: 'Choose Starting Feature',
-      instruction: 'Choose one starting feature from the list.',
-      component: null,
-    },
-    {
-      header: 'Roll or Choose Six Items',
-      instruction: 'Roll or choose six items to start with.',
-      component: null,
-    },
-    {
-      header: 'Choose Combat Gear',
-      instruction: 'Choose your combat gear.',
-      component: null,
-    },
-    {
-      header: 'Roll or Create Appearance',
-      instruction: "Roll or create your character's appearance.",
-      component: null,
-    },
-    {
-      header: 'Roll or Create Physical Detail',
-      instruction: 'Roll or create a physical detail for your character.',
-      component: null,
-    },
-    {
-      header: 'Roll or Create Background',
-      instruction: 'Roll or create a background for your character.',
-      component: null,
-    },
-    {
-      header: 'Roll or Create Clothing',
-      instruction: "Roll or create your character's clothing.",
-      component: null,
-    },
-    {
-      header: 'Roll or Create Personality',
-      instruction: 'Roll or create a personality for your character.',
-      component: null,
-    },
-    {
-      header: 'Roll or Create Mannerism',
-      instruction: 'Roll or create a mannerism for your character.',
-      component: null,
-    },
-    {
-      header: 'Record Name',
-      instruction: "Record your character's name.",
-      component: null,
+      component: CharacterFormHealthComponent,
     },
   ];
 
@@ -137,5 +88,6 @@ export class CharacterFormComponent {
     this.startingCharacter.abilities.str.value = abilities.str;
     this.startingCharacter.abilities.dex.value = abilities.dex;
     this.startingCharacter.abilities.wil.value = abilities.wil;
+    console.log('startingCharacter:', this.startingCharacter);
   }
 }

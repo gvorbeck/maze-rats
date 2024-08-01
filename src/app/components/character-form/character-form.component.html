@@ -16,7 +16,7 @@
               {{ panel.instruction }}
             </div>
             <ng-container *ngIf="panel.component">
-              <ng-container *ngComponentOutlet="panel.component"></ng-container>
+              <ng-container *ngComponentOutlet="panel.component" />
             </ng-container>
           </div>
           <div class="flex py-4 gap-2">
