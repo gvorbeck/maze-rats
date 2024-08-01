@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
-import { Character } from '../../models/character.model';
+import { Character, AbilityKey } from '../../models/character.model';
 import { CharacterFormAbilitiesComponent } from './character-form-abilities/character-form-abilities.component';
 import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
 
@@ -94,6 +94,13 @@ export class CharacterFormComponent {
     this.startingCharacter.abilities.dex.value = abilities.dex;
     this.startingCharacter.abilities.wil.value = abilities.wil;
     console.log('startingCharacter:', this.startingCharacter);
+  }
+
+  onAbilityChanged({ stat, value }: { stat: AbilityKey; value: number }) {
+    if (this.startingCharacter.abilities[stat]) {
+      this.startingCharacter.abilities[stat].value = value;
+      console.log('startingCharacter:', this.startingCharacter);
+    }
   }
 
   onHealthChanged(health: number) {
