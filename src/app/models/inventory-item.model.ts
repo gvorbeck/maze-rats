@@ -8,9 +8,11 @@ export interface InventoryItem {
     | 'transport'
     | 'property'
     | 'hireling';
-  armor: number | undefined;
-  hands: number | undefined;
-  damage: number | undefined;
-  detail: string | undefined;
-  value: number | undefined;
+  armor?: number;
+  slots: number | null;
+  damage?: number;
+  detail?: string;
+  value: number | null;
+  starter?: boolean;
+  amount?: number | string;
 }
