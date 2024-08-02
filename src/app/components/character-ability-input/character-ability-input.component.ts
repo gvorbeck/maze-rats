@@ -17,6 +17,18 @@ export class CharacterAbilityInputComponent {
   @Input() modifier: number | null = null;
   @Output() valueChange = new EventEmitter<number>();
 
+  // Method to simulate rolling a D6 die
+  rollDie(): number {
+    return Math.floor(Math.random() * 6) + 1;
+  }
+
+  // Method to handle the button click event
+  onRollClick() {
+    this.value = this.rollDie();
+    this.onValueChange(this.value);
+  }
+
+  // Method to handle the value change event
   onValueChange(value: number) {
     this.valueChange.emit(value);
   }

@@ -1,5 +1,5 @@
 <div class="flex gap-4">
-  <p-button [label]="'Roll ' + label" />
+  <p-button [label]="'Roll ' + label" (onClick)="onRollClick()" />
   <p-inputNumber
     [(ngModel)]="value"
     (ngModelChange)="onValueChange($event)"
