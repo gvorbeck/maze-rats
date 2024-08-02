@@ -27,7 +27,9 @@
               />
             </ng-container>
             <ng-container *ngIf="panel.name === 'feature'">
-              <app-character-form-feature />
+              <app-character-form-feature
+                (featureChanged)="onFeatureChanged($event)"
+              />
             </ng-container>
             <!-- Add more conditions for other panels -->
           </div>
@@ -37,12 +39,12 @@
               label="Back"
               severity="secondary"
               (onClick)="prevCallback.emit()"
-            ></p-button>
+            />
             <p-button
               *ngIf="i < stepperPanels.length - 1"
               label="Next"
               (onClick)="nextCallback.emit()"
-            ></p-button>
+            />
           </div>
         </ng-template>
       </p-stepperPanel>
