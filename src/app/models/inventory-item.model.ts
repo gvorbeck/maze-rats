@@ -1,13 +1,15 @@
+export type TypeName =
+  | 'weapon'
+  | 'armor'
+  | 'item'
+  | 'animal'
+  | 'transport'
+  | 'property'
+  | 'hireling';
+
 export interface InventoryItem {
   name: string;
-  type:
-    | 'weapon'
-    | 'armor'
-    | 'item'
-    | 'animal'
-    | 'transport'
-    | 'property'
-    | 'hireling';
+  type: TypeName;
   armor?: number;
   slots: number | null;
   damage?: number;
