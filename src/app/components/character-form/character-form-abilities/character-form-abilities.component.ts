@@ -39,13 +39,23 @@ export class CharacterFormAbilitiesComponent {
     { id: 6, str: 0, dex: 1, wil: 2 },
   ];
 
+  // Predefined table of single ability scores corresponding to a d6 roll
+  singleAbilityTable = [
+    { id: '1-2', score: '+0' },
+    { id: '3-5', score: '+1' },
+    { id: '6', score: '+2' },
+  ];
+
   // Holds the selected ability group after a roll
   selectedAbilityGroup: any;
 
+  // Inputs for individual ability scores
   rollInput: number = 0;
   strInput: number = 0;
   dexInput: number = 0;
   wilInput: number = 0;
+  // Modifier array for individual ability scores
+  modifierArray: number[] = [];
 
   // Function to simulate a d6 roll (returns a number between 1 and 6)
   rollAbility(): number {
@@ -67,6 +77,31 @@ export class CharacterFormAbilitiesComponent {
     }
   }
 
+  // Get the modifier for a specific ability score
+  findStatModifier(stat: AbilityKey, value: number) {
+    let modifier: number;
+
+    if (value <= 2) {
+      modifier = 0;
+    } else if (value <= 5) {
+      modifier = 1;
+    } else {
+      modifier = 2;
+    }
+
+    // Map the stat to the correct index in the modifier array
+    const statIndexMap: { [key in AbilityKey]: number } = {
+      str: 0,
+      dex: 1,
+      wil: 2,
+    };
+
+    // Update the modifier array with the new modifier
+    this.modifierArray[statIndexMap[stat]] = modifier;
+    // Emit the specific stat and value
+    this.abilityChanged.emit({ stat, value: modifier });
+  }
+
   // Handles input number changes and updates the selected ability group
   onRollInputChange(value: number) {
     this.rollInput = value;
@@ -80,8 +115,8 @@ export class CharacterFormAbilitiesComponent {
     }
   }
 
+  // Handles individual ability score changes and emits the specific stat and value
   onRollStatChange(value: number, stat: AbilityKey) {
-    console.log(value, stat);
     if (stat === 'str') {
       this.strInput = value;
     }
@@ -91,8 +126,9 @@ export class CharacterFormAbilitiesComponent {
     if (stat === 'wil') {
       this.wilInput = value;
     }
-    // Emit the specific stat and value
-    this.abilityChanged.emit({ stat, value });
+
+    // Find the modifier for the specific stat
+    this.findStatModifier(stat, value);
   }
 
   // Emits the selected row data when a row is selected
