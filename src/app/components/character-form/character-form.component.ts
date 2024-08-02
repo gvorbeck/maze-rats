@@ -118,7 +118,7 @@ export class CharacterFormComponent {
   }
 
   onFeatureChanged(feature: Feature | 'path') {
-    console.log('feature', feature);
+    console.log('startingCharacter:', this.startingCharacter);
     if (feature !== undefined && feature !== 'path') {
       this.startingCharacter.feature = feature;
     }
