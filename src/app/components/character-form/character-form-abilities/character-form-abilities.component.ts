@@ -6,6 +6,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
 import { AbilityKey } from '../../../models/character.model';
+import { CharacterAbilityInputComponent } from '../../character-ability-input/character-ability-input.component';
 
 @Component({
   selector: 'app-character-form-abilities',
@@ -17,6 +18,7 @@ import { AbilityKey } from '../../../models/character.model';
     TabViewModule,
     InputNumberModule,
     FormsModule,
+    CharacterAbilityInputComponent,
   ],
   templateUrl: './character-form-abilities.component.html',
   styleUrls: ['./character-form-abilities.component.scss'],

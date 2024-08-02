@@ -67,60 +67,24 @@
           </tr>
         </ng-template>
       </p-table>
-      <div class="flex gap-4">
-        <p-button label="Roll STR" />
-        <p-inputNumber
-          [(ngModel)]="strInput"
-          (ngModelChange)="onRollStatChange($event, 'str')"
-          min="1"
-          max="6"
-          buttonLayout="horizontal"
-          inputId="horizontal"
-          spinnerMode="horizontal"
-          decrementButtonClass="p-button-danger"
-          incrementButtonClass="p-button-success"
-          incrementButtonIcon="pi pi-plus"
-          decrementButtonIcon="pi pi-minus"
-          [showButtons]="true"
-        />
-        <p>{{ modifierArray[0] && "+" + modifierArray[0] }}</p>
-      </div>
-      <div class="flex gap-4">
-        <p-button label="Roll DEX" />
-        <p-inputNumber
-          [(ngModel)]="dexInput"
-          (ngModelChange)="onRollStatChange($event, 'dex')"
-          min="1"
-          max="6"
-          buttonLayout="horizontal"
-          inputId="horizontal"
-          spinnerMode="horizontal"
-          decrementButtonClass="p-button-danger"
-          incrementButtonClass="p-button-success"
-          incrementButtonIcon="pi pi-plus"
-          decrementButtonIcon="pi pi-minus"
-          [showButtons]="true"
-        />
-        <p>{{ modifierArray[1] && "+" + modifierArray[1] }}</p>
-      </div>
-      <div class="flex gap-4">
-        <p-button label="Roll WIL" />
-        <p-inputNumber
-          [(ngModel)]="wilInput"
-          (ngModelChange)="onRollStatChange($event, 'wil')"
-          min="1"
-          max="6"
-          buttonLayout="horizontal"
-          inputId="horizontal"
-          spinnerMode="horizontal"
-          decrementButtonClass="p-button-danger"
-          incrementButtonClass="p-button-success"
-          incrementButtonIcon="pi pi-plus"
-          decrementButtonIcon="pi pi-minus"
-          [showButtons]="true"
-        />
-        <p>{{ modifierArray[2] && "+" + modifierArray[2] }}</p>
-      </div>
+      <app-character-ability-input
+        label="STR"
+        [(value)]="strInput"
+        [modifier]="modifierArray[0]"
+        (valueChange)="onRollStatChange($event, 'str')"
+      ></app-character-ability-input>
+      <app-character-ability-input
+        label="DEX"
+        [(value)]="dexInput"
+        [modifier]="modifierArray[1]"
+        (valueChange)="onRollStatChange($event, 'dex')"
+      ></app-character-ability-input>
+      <app-character-ability-input
+        label="WIL"
+        [(value)]="wilInput"
+        [modifier]="modifierArray[2]"
+        (valueChange)="onRollStatChange($event, 'wil')"
+      ></app-character-ability-input>
     </div>
   </p-tabPanel>
 </p-tabView>
