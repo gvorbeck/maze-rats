@@ -32,6 +32,7 @@ export interface Character {
     belt: InventoryItem[];
     backpack: InventoryItem[];
     gold: number;
+    unassigned: InventoryItem[];
   };
   details: {
     appearance: string;
