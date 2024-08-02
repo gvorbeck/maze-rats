@@ -6,6 +6,7 @@ import { Character, AbilityKey, Feature } from '../../models/character.model';
 import { CharacterFormAbilitiesComponent } from './character-form-abilities/character-form-abilities.component';
 import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
 import { CharacterFormFeatureComponent } from './character-form-feature/character-form-feature.component';
+import { CharacterFormItemsComponent } from './character-form-items/character-form-items.component';
 
 interface CharacterStepperPanel {
   header: string;
@@ -24,6 +25,7 @@ interface CharacterStepperPanel {
     CharacterFormAbilitiesComponent,
     CharacterFormHealthComponent,
     CharacterFormFeatureComponent,
+    CharacterFormItemsComponent,
   ],
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
@@ -56,6 +58,7 @@ export class CharacterFormComponent {
       belt: [],
       backpack: [],
       gold: 0,
+      unassigned: [],
     },
     details: {
       appearance: '',
@@ -94,6 +97,12 @@ export class CharacterFormComponent {
       instruction: 'Your PC begins with one of the following features:',
       component: CharacterFormFeatureComponent,
       name: 'feature',
+    },
+    {
+      header: 'Choose starting inventory',
+      instruction: '',
+      component: CharacterFormItemsComponent,
+      name: 'items',
     },
     // Add more panels as needed
   ];

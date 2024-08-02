@@ -1,0 +1,262 @@
+[
+  {
+    "name": "Animal Scent",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Bear Trap",
+    "type": "item",
+    "slots": 2,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Bedroll",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Caltrops",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Chain",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true,
+    "amount": "10 ft."
+  },
+  {
+    "name": "Chalk",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Chisel",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Crowbar",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Fishing Net",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Glass Marbles",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Glue",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Grappling Hook",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Grease",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Hacksaw",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Hammer",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Hand drill",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Horn",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Iron spikes",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Iron tongs",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Lantern and Oil",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Large Sack",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Lockpicks",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true,
+    "amount": 3
+  },
+  {
+    "name": "Manacles",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Medicine",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true,
+    "amount": 3
+  },
+  {
+    "name": "Metal file",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Rations",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true,
+    "amount": 3
+  },
+  {
+    "name": "Rope",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true,
+    "amount": "50 ft."
+  },
+  {
+    "name": "Steel wire",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Shovel",
+    "type": "item",
+    "armor": null,
+    "slots": 1,
+    "damage": 0,
+    "detail": "",
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Steel mirror",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Ten Foot Pole",
+    "type": "item",
+    "slots": 2,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Tinderbox",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Torch",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Vial of Acid",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Vial of Poison",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Waterskin",
+    "type": "item",
+    "slots": 1,
+    "value": null,
+    "starter": true
+  }
+]
