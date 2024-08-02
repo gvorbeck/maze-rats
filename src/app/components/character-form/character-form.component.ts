@@ -56,6 +56,7 @@ export class CharacterFormComponent {
       belt: [],
       backpack: [],
       gold: 0,
+      unassigned: [],
     },
     details: {
       appearance: '',
