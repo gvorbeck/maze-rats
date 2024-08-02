@@ -82,7 +82,8 @@ export class CharacterFormComponent {
     },
     {
       header: 'Record Maximum Health',
-      instruction: 'Record your maximum health points.',
+      instruction:
+        'Your PC begins with 4 maximum health and 4 current health. PCs add 2 to their maximum health (but not current health) each time they gain a level.',
       component: CharacterFormHealthComponent,
       name: 'health',
     },

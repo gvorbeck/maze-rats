@@ -14,9 +14,9 @@ import { ButtonModule } from 'primeng/button';
 export class CharacterFormHealthComponent {
   @Output() healthChanged = new EventEmitter<number>();
 
-  health: number = 0;
+  healthPoints: number = 4;
 
   updateHealth() {
-    this.healthChanged.emit(this.health);
+    this.healthChanged.emit(this.healthPoints);
   }
 }

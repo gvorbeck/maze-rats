@@ -1,10 +1,4 @@
-<div class="flex flex-column">
-  <label for="health">Health</label>
-  <input
-    id="health"
-    type="number"
-    pInputText
-    [(ngModel)]="health"
-    (ngModelChange)="updateHealth()"
-  />
+<div class="flex gap-2 items-center">
+  <label for="username">Health</label>
+  <input pInputText id="health" [(ngModel)]="healthPoints" />
 </div>
