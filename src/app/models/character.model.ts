@@ -7,6 +7,16 @@ export interface Ability {
   value: number;
 }
 
+export type Feature =
+  | 'attack-bonus'
+  | 'spell-slot'
+  | 'briarborn'
+  | 'fingersmith'
+  | 'roofrunner'
+  | 'shadowjack'
+  | 'path'
+  | undefined;
+
 export interface Character {
   id: string;
   abilities: {
@@ -15,12 +25,7 @@ export interface Character {
     wil: Ability;
   };
   health: number;
-  feature:
-    | undefined
-    | 'briarborn'
-    | 'fingersmith'
-    | 'roofrunner'
-    | 'shadowjack';
+  feature: Feature;
   items: {
     hands: InventoryItem[];
     worn: InventoryItem[];

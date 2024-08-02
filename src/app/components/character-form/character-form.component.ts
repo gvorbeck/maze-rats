@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
-import { Character, AbilityKey } from '../../models/character.model';
+import { Character, AbilityKey, Feature } from '../../models/character.model';
 import { CharacterFormAbilitiesComponent } from './character-form-abilities/character-form-abilities.component';
 import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
+import { CharacterFormFeatureComponent } from './character-form-feature/character-form-feature.component';
 
 interface CharacterStepperPanel {
   header: string;
@@ -22,6 +23,7 @@ interface CharacterStepperPanel {
     CommonModule,
     CharacterFormAbilitiesComponent,
     CharacterFormHealthComponent,
+    CharacterFormFeatureComponent,
   ],
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
@@ -46,7 +48,7 @@ export class CharacterFormComponent {
         value: 0,
       },
     },
-    health: 0,
+    health: 4,
     feature: undefined,
     items: {
       hands: [],
@@ -82,9 +84,16 @@ export class CharacterFormComponent {
     },
     {
       header: 'Record Maximum Health',
-      instruction: 'Record your maximum health points.',
+      instruction:
+        'Your PC begins with 4 maximum health and 4 current health. PCs add 2 to their maximum health (but not current health) each time they gain a level.',
       component: CharacterFormHealthComponent,
       name: 'health',
+    },
+    {
+      header: 'Choose Starting Feature',
+      instruction: 'Your PC begins with one of the following features:',
+      component: CharacterFormFeatureComponent,
+      name: 'feature',
     },
     // Add more panels as needed
   ];
@@ -106,5 +115,12 @@ export class CharacterFormComponent {
   onHealthChanged(health: number) {
     this.startingCharacter.health = health;
     console.log('startingCharacter:', this.startingCharacter);
+  }
+
+  onFeatureChanged(feature: Feature | 'path') {
+    console.log('startingCharacter:', this.startingCharacter);
+    if (feature !== undefined && feature !== 'path') {
+      this.startingCharacter.feature = feature;
+    }
   }
 }
