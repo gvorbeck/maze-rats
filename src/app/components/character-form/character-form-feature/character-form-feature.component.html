@@ -1,0 +1,63 @@
+<div class="flex flex-col gap-4">
+  <app-character-feature-option
+    name="character-feature"
+    value="attack-bonus"
+    [(model)]="feature"
+    inputId="featureAttackBonus"
+    label="A +1 attack bonus (add 1 to all attack rolls)."
+    (modelChange)="onFeatureChange($event)"
+  />
+
+  <app-character-feature-option
+    name="character-feature"
+    value="spell-slot"
+    [(model)]="feature"
+    inputId="featureSpellSlot"
+    label="A single spell slot (cast one spell per day, generated from the tables on the Magic page)."
+    (modelChange)="onFeatureChange($event)"
+  />
+
+  <app-character-feature-option
+    name="character-feature"
+    value="path"
+    [(model)]="feature"
+    inputId="featurePath"
+    label="A single path from the four following options (gain advantage on related danger rolls):"
+    (modelChange)="onFeatureChange($event)"
+  />
+
+  <div *ngIf="feature === 'path'" class="ml-6">
+    <app-character-feature-option
+      name="path"
+      value="briarborn"
+      [(model)]="path"
+      inputId="pathBriarborn"
+      label="Briarborn: Tracking, foraging, survival."
+      (modelChange)="onFeatureChange($event)"
+    />
+    <app-character-feature-option
+      name="path"
+      value="fingersmith"
+      [(model)]="path"
+      inputId="pathFingersmith"
+      label="Fingersmith: Tinkering, picking locks or pockets."
+      (modelChange)="onFeatureChange($event)"
+    />
+    <app-character-feature-option
+      name="path"
+      value="roofrunner"
+      [(model)]="path"
+      inputId="pathRoofrunner"
+      label="Roofrunner: Climbing, leaping, balancing."
+      (modelChange)="onFeatureChange($event)"
+    />
+    <app-character-feature-option
+      name="path"
+      value="shadowjack"
+      [(model)]="path"
+      inputId="pathShadowjack"
+      label="Shadowjack: Moving silently, hiding in shadows."
+      (modelChange)="onFeatureChange($event)"
+    />
+  </div>
+</div>

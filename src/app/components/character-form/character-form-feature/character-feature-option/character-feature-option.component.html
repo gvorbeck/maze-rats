@@ -1,0 +1,10 @@
+<div class="flex items-center">
+  <p-radioButton
+    [name]="name"
+    [value]="value"
+    [(ngModel)]="model"
+    [inputId]="inputId"
+    (ngModelChange)="onModelChange($event)"
+  />
+  <label [for]="inputId" class="ml-2">{{ label }}</label>
+</div>

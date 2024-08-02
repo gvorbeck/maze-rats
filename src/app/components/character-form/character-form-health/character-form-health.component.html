@@ -1,4 +1,17 @@
 <div class="flex gap-2 items-center">
-  <label for="username">Health</label>
-  <input pInputText id="health" [(ngModel)]="healthPoints" />
+  <label for="health">Health</label>
+  <p-inputNumber
+    id="health"
+    [(ngModel)]="healthPoints"
+    (ngModelChange)="onUpdateHealth()"
+    min="1"
+    buttonLayout="horizontal"
+    inputId="horizontal"
+    spinnerMode="horizontal"
+    decrementButtonClass="p-button-danger"
+    incrementButtonClass="p-button-success"
+    incrementButtonIcon="pi pi-plus"
+    decrementButtonIcon="pi pi-minus"
+    [showButtons]="true"
+  />
 </div>

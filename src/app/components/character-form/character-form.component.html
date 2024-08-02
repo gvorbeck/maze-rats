@@ -19,12 +19,15 @@
               <app-character-form-abilities
                 (abilitiesChanged)="onAbilitiesChanged($event)"
                 (abilityChanged)="onAbilityChanged($event)"
-              ></app-character-form-abilities>
+              />
             </ng-container>
             <ng-container *ngIf="panel.name === 'health'">
               <app-character-form-health
                 (healthChanged)="onHealthChanged($event)"
-              ></app-character-form-health>
+              />
+            </ng-container>
+            <ng-container *ngIf="panel.name === 'feature'">
+              <app-character-form-feature />
             </ng-container>
             <!-- Add more conditions for other panels -->
           </div>
