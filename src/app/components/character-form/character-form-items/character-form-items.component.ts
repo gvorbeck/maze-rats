@@ -34,6 +34,8 @@ export class CharacterFormItemsComponent {
   }
 
   drop() {
+    // If the item is dropped in the selected items list, remove it from the available items list
+    // and add it to the selected items list
     if (this.draggedItem) {
       let draggedItemIndex = this.findIndex(this.draggedItem);
       this.selectedItems = [

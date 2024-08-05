@@ -1,4 +1,28 @@
-<h2>Starter Items</h2>
-<div *ngFor="let item of availableItems">
-  <h3>{{ item.name }}</h3>
+<div class="flex gap-4">
+  <div>
+    <h2>Starter Items</h2>
+    <ul>
+      <li
+        *ngFor="let item of availableItems"
+        pDraggable
+        (onDragStart)="dragStart(item)"
+        (onDragEnd)="dragEnd()"
+      >
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h2>Character Items</h2>
+    <ul pDroppable (onDrop)="drop()" class="bg-slate-600 h-10 w-full">
+      <li
+        *ngFor="let item of selectedItems"
+        pDraggable
+        (onDragStart)="dragStart(item)"
+        (onDragEnd)="dragEnd()"
+      >
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
 </div>
