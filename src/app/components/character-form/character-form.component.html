@@ -36,6 +36,9 @@
                 (itemsChanged)="onItemsChanged($event)"
               />
             </ng-container>
+            <ng-container *ngIf="panel.name === 'details'">
+              <app-character-form-details />
+            </ng-container>
             <!-- Add more conditions for other panels -->
           </div>
           <div class="flex py-4 gap-2">

@@ -8,6 +8,7 @@ import { CharacterFormHealthComponent } from './character-form-health/character-
 import { CharacterFormFeatureComponent } from './character-form-feature/character-form-feature.component';
 import { CharacterFormItemsComponent } from './character-form-items/character-form-items.component';
 import { InventoryItem } from '../../models/inventory-item.model';
+import { CharacterFormDetailsComponent } from './character-form-details/character-form-details.component';
 
 interface CharacterStepperPanel {
   header: string;
@@ -27,6 +28,7 @@ interface CharacterStepperPanel {
     CharacterFormHealthComponent,
     CharacterFormFeatureComponent,
     CharacterFormItemsComponent,
+    CharacterFormDetailsComponent,
   ],
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
@@ -100,11 +102,18 @@ export class CharacterFormComponent {
       name: 'feature',
     },
     {
-      header: 'Choose starting inventory',
+      header: 'Choose Starting Inventory',
       instruction:
         'Record the location of all items, armor, and weapons: hands, worn, belt, or backpack. Belts carry up to two items, and backpacks can carry as much as a backpack could reasonably fit. PCs start with: light armor (+1 armor), a shield (+1 armor, 1 hand), and two weapons.',
       component: CharacterFormItemsComponent,
       name: 'items',
+    },
+    {
+      header: 'Create Details',
+      instruction:
+        "Describe your PC's appearance, including clothing, physical features, and mannerisms.",
+      component: CharacterFormDetailsComponent,
+      name: 'details',
     },
     // Add more panels as needed
   ];
