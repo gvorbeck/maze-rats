@@ -4,7 +4,7 @@ import { Spell } from './spell.model';
 export interface Ability {
   long: string;
   short: string;
-  value: number;
+  value: number | null;
 }
 
 export type Feature =
@@ -15,7 +15,7 @@ export type Feature =
   | 'roofrunner'
   | 'shadowjack'
   | 'path'
-  | undefined;
+  | null;
 
 export interface Character {
   id: string;

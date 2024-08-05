@@ -42,21 +42,21 @@ export class CharacterFormComponent {
       str: {
         long: 'Strength',
         short: 'STR',
-        value: 0,
+        value: null,
       },
       dex: {
         long: 'Dexterity',
         short: 'DEX',
-        value: 0,
+        value: null,
       },
       wil: {
         long: 'Willpower',
         short: 'WIL',
-        value: 0,
+        value: null,
       },
     },
     health: 4,
-    feature: undefined,
+    feature: null,
     items: {
       hands: [],
       worn: [],
@@ -147,7 +147,9 @@ export class CharacterFormComponent {
 
   onFeatureChanged(feature: Feature | 'path') {
     console.log('startingCharacter:', this.startingCharacter);
-    if (feature !== undefined && feature !== 'path') {
+    if (feature === 'path') {
+      this.startingCharacter.feature = null;
+    } else {
       this.startingCharacter.feature = feature;
     }
   }
@@ -173,5 +175,24 @@ export class CharacterFormComponent {
   onNameChanged(name: string) {
     this.startingCharacter.name = name;
     console.log('startingCharacter:', this.startingCharacter);
+  }
+
+  isNextDisabled(panelIndex: number): boolean {
+    const panel = this.stepperPanels[panelIndex];
+    let outcome = true;
+    switch (panel.name) {
+      case 'abilities':
+        outcome =
+          this.startingCharacter.abilities.str.value === null &&
+          this.startingCharacter.abilities.dex.value === null &&
+          this.startingCharacter.abilities.wil.value === null;
+        break;
+      case 'health':
+        outcome =
+          this.startingCharacter.health === 0 ||
+          this.startingCharacter.health === null;
+        break;
+    }
+    return outcome;
   }
 }

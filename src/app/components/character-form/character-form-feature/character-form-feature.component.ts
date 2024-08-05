@@ -18,6 +18,7 @@ export class CharacterFormFeatureComponent {
   path: Feature | null = null;
 
   onFeatureChange(feature: Feature) {
+    console.log('Feature changed:', feature);
     this.featureChanged.emit(feature);
   }
 }
