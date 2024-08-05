@@ -192,6 +192,9 @@ export class CharacterFormComponent {
           this.startingCharacter.health === 0 ||
           this.startingCharacter.health === null;
         break;
+      case 'feature':
+        outcome = this.startingCharacter.feature === null;
+        break;
     }
     return outcome;
   }
