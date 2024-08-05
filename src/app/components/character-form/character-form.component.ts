@@ -9,6 +9,7 @@ import { CharacterFormFeatureComponent } from './character-form-feature/characte
 import { CharacterFormItemsComponent } from './character-form-items/character-form-items.component';
 import { InventoryItem } from '../../models/inventory-item.model';
 import { CharacterFormDetailsComponent } from './character-form-details/character-form-details.component';
+import { CharacterFormNameComponent } from './character-form-name/character-form-name.component';
 
 interface CharacterStepperPanel {
   header: string;
@@ -29,6 +30,7 @@ interface CharacterStepperPanel {
     CharacterFormFeatureComponent,
     CharacterFormItemsComponent,
     CharacterFormDetailsComponent,
+    CharacterFormNameComponent,
   ],
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
@@ -122,7 +124,6 @@ export class CharacterFormComponent {
       component: null,
       name: 'name',
     },
-    // Add more panels as needed
   ];
 
   onAbilitiesChanged(abilities: any) {
@@ -166,6 +167,11 @@ export class CharacterFormComponent {
     this.startingCharacter.items.belt = belt;
     this.startingCharacter.items.worn = worn;
     this.startingCharacter.items.backpack = backpack;
+    console.log('startingCharacter:', this.startingCharacter);
+  }
+
+  onNameChanged(name: string) {
+    this.startingCharacter.name = name;
     console.log('startingCharacter:', this.startingCharacter);
   }
 }

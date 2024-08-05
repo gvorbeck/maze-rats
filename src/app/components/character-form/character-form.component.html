@@ -39,7 +39,9 @@
             <ng-container *ngIf="panel.name === 'details'">
               <app-character-form-details />
             </ng-container>
-            <!-- Add more conditions for other panels -->
+            <ng-container *ngIf="panel.name === 'name'">
+              <app-character-form-name (nameChanged)="onNameChanged($event)" />
+            </ng-container>
           </div>
           <div class="flex py-4 gap-2">
             <p-button
