@@ -134,8 +134,21 @@ export class CharacterFormComponent {
     }
   }
 
-  onItemsChanged(items: InventoryItem[]) {
-    this.startingCharacter.items.unassigned = items;
+  onItemsChanged({
+    hands,
+    belt,
+    worn,
+    backpack,
+  }: {
+    hands: InventoryItem[];
+    belt: InventoryItem[];
+    worn: InventoryItem[];
+    backpack: InventoryItem[];
+  }) {
+    this.startingCharacter.items.hands = hands;
+    this.startingCharacter.items.belt = belt;
+    this.startingCharacter.items.worn = worn;
+    this.startingCharacter.items.backpack = backpack;
     console.log('startingCharacter:', this.startingCharacter);
   }
 }

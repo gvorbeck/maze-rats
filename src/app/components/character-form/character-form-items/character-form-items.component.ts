@@ -12,7 +12,12 @@ import { DragDropModule } from 'primeng/dragdrop';
   styleUrls: ['./character-form-items.component.scss'],
 })
 export class CharacterFormItemsComponent {
-  @Output() itemsChanged = new EventEmitter<InventoryItem[]>();
+  @Output() itemsChanged = new EventEmitter<{
+    hands: InventoryItem[];
+    belt: InventoryItem[];
+    worn: InventoryItem[];
+    backpack: InventoryItem[];
+  }>();
 
   availableItems: InventoryItem[] | undefined;
   handsItems: InventoryItem[] = [];
@@ -75,12 +80,17 @@ export class CharacterFormItemsComponent {
     return index;
   }
 
-  getAllSelectedItems(): InventoryItem[] {
-    return [
-      ...this.handsItems,
-      ...this.beltItems,
-      ...this.wornItems,
-      ...this.backpackItems,
-    ];
+  getAllSelectedItems(): {
+    hands: InventoryItem[];
+    belt: InventoryItem[];
+    worn: InventoryItem[];
+    backpack: InventoryItem[];
+  } {
+    return {
+      hands: this.handsItems,
+      belt: this.beltItems,
+      worn: this.wornItems,
+      backpack: this.backpackItems,
+    };
   }
 }
