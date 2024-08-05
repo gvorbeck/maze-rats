@@ -101,7 +101,8 @@ export class CharacterFormComponent {
     },
     {
       header: 'Choose starting inventory',
-      instruction: '',
+      instruction:
+        'Record the location of all items, armor, and weapons: hands, worn, belt, or backpack. Belts carry up to two items, and backpacks can carry as much as a backpack could reasonably fit. PCs start with: light armor (+1 armor), a shield (+1 armor, 1 hand), and two weapons.',
       component: CharacterFormItemsComponent,
       name: 'items',
     },

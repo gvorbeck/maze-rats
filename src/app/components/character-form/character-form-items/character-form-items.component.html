@@ -1,6 +1,19 @@
 <div class="flex gap-4">
   <div>
-    <h2>Starter Items</h2>
+    <h2>Starting Items</h2>
+    <ul>
+      <li
+        *ngFor="let item of availableItems"
+        pDraggable
+        (onDragStart)="dragStart(item)"
+        (onDragEnd)="dragEnd()"
+      >
+        {{ item.name }}
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h2>Combat Gear</h2>
     <ul>
       <li
         *ngFor="let item of availableItems"
