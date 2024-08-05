@@ -8,7 +8,7 @@
         (onDragStart)="dragStart(item)"
         (onDragEnd)="dragEnd()"
       >
-        {{ item.name }}
+        {{ item.name }}<span *ngIf="item.amount"> ({{ item.amount }})</span>
       </li>
     </ul>
   </div>
