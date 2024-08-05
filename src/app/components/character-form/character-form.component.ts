@@ -7,6 +7,9 @@ import { CharacterFormAbilitiesComponent } from './character-form-abilities/char
 import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
 import { CharacterFormFeatureComponent } from './character-form-feature/character-form-feature.component';
 import { CharacterFormItemsComponent } from './character-form-items/character-form-items.component';
+import { InventoryItem } from '../../models/inventory-item.model';
+import { CharacterFormDetailsComponent } from './character-form-details/character-form-details.component';
+import { CharacterFormNameComponent } from './character-form-name/character-form-name.component';
 
 interface CharacterStepperPanel {
   header: string;
@@ -26,6 +29,8 @@ interface CharacterStepperPanel {
     CharacterFormHealthComponent,
     CharacterFormFeatureComponent,
     CharacterFormItemsComponent,
+    CharacterFormDetailsComponent,
+    CharacterFormNameComponent,
   ],
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
@@ -99,12 +104,26 @@ export class CharacterFormComponent {
       name: 'feature',
     },
     {
-      header: 'Choose starting inventory',
-      instruction: '',
+      header: 'Choose Starting Inventory',
+      instruction:
+        'Record the location of all items, armor, and weapons: hands, worn, belt, or backpack. Belts carry up to two items, and backpacks can carry as much as a backpack could reasonably fit. PCs start with: light armor (+1 armor), a shield (+1 armor, 1 hand), and two weapons.',
       component: CharacterFormItemsComponent,
       name: 'items',
     },
-    // Add more panels as needed
+    {
+      header: 'Create Details',
+      instruction:
+        "Describe your PC's appearance, including clothing, physical features, and mannerisms.",
+      component: CharacterFormDetailsComponent,
+      name: 'details',
+    },
+    {
+      header: 'Name Your Character',
+      instruction:
+        'Your character starts at level 1 and has 0 XP. Give your character a name.',
+      component: null,
+      name: 'name',
+    },
   ];
 
   onAbilitiesChanged(abilities: any) {
@@ -131,5 +150,28 @@ export class CharacterFormComponent {
     if (feature !== undefined && feature !== 'path') {
       this.startingCharacter.feature = feature;
     }
+  }
+
+  onItemsChanged({
+    hands,
+    belt,
+    worn,
+    backpack,
+  }: {
+    hands: InventoryItem[];
+    belt: InventoryItem[];
+    worn: InventoryItem[];
+    backpack: InventoryItem[];
+  }) {
+    this.startingCharacter.items.hands = hands;
+    this.startingCharacter.items.belt = belt;
+    this.startingCharacter.items.worn = worn;
+    this.startingCharacter.items.backpack = backpack;
+    console.log('startingCharacter:', this.startingCharacter);
+  }
+
+  onNameChanged(name: string) {
+    this.startingCharacter.name = name;
+    console.log('startingCharacter:', this.startingCharacter);
   }
 }

@@ -1,0 +1,39 @@
+<div *ngFor="let detail of detailsForm">
+  <h3>{{ detail.label }}</h3>
+  <div class="flex flex-col gap-2">
+    <!-- Randomize Button and Dropdown -->
+    <div class="flex items-center gap-2">
+      <p-radioButton
+        name="details-{{ detail.name }}"
+        value="random"
+        [(ngModel)]="details[detail.name]"
+        inputId="random-{{ detail.name }}"
+        (onClick)="randomize(detail.name, detail.options)"
+      ></p-radioButton>
+      <p-button
+        label="Randomize"
+        (onClick)="randomize(detail.name, detail.options)"
+      ></p-button>
+      <p-dropdown
+        [options]="detail.options"
+        [(ngModel)]="details[detail.name]"
+        placeholder="Select {{ detail.label }}"
+      ></p-dropdown>
+    </div>
+    <!-- Manual Input -->
+    <div class="flex items-center gap-2">
+      <p-radioButton
+        name="details-{{ detail.name }}"
+        value="manual"
+        [(ngModel)]="details[detail.name]"
+        inputId="manual-{{ detail.name }}"
+      ></p-radioButton>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="details[detail.name]"
+        placeholder="Enter {{ detail.label }}"
+      />
+    </div>
+  </div>
+</div>
