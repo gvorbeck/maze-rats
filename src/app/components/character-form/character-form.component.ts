@@ -115,6 +115,13 @@ export class CharacterFormComponent {
       component: CharacterFormDetailsComponent,
       name: 'details',
     },
+    {
+      header: 'Name Your Character',
+      instruction:
+        'Your character starts at level 1 and has 0 XP. Give your character a name.',
+      component: null,
+      name: 'name',
+    },
     // Add more panels as needed
   ];
 
