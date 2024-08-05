@@ -20,6 +20,9 @@ export class CharacterFormItemsComponent {
   }>();
 
   availableItems: InventoryItem[] | undefined;
+  availableLightWeapons: InventoryItem[] | undefined;
+  availableHeavyWeapons: InventoryItem[] | undefined;
+  availableRangedWeapons: InventoryItem[] | undefined;
   handsItems: InventoryItem[] = [];
   beltItems: InventoryItem[] = [];
   wornItems: InventoryItem[] = [];
@@ -33,6 +36,21 @@ export class CharacterFormItemsComponent {
       .getStarterItems()
       .subscribe((data: InventoryItem[]) => {
         this.availableItems = data;
+      });
+    this.inventoryService
+      .getLightWeapons()
+      .subscribe((data: InventoryItem[]) => {
+        this.availableLightWeapons = data;
+      });
+    this.inventoryService
+      .getHeavyWeapons()
+      .subscribe((data: InventoryItem[]) => {
+        this.availableHeavyWeapons = data;
+      });
+    this.inventoryService
+      .getRangedWeapons()
+      .subscribe((data: InventoryItem[]) => {
+        this.availableRangedWeapons = data;
       });
   }
 

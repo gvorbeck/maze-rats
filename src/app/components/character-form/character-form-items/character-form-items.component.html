@@ -14,16 +14,45 @@
   </div>
   <div>
     <h2>Combat Gear</h2>
-    <ul>
-      <li
-        *ngFor="let item of availableItems"
-        pDraggable
-        (onDragStart)="dragStart(item)"
-        (onDragEnd)="dragEnd()"
-      >
-        {{ item.name }}
-      </li>
-    </ul>
+    <div>
+      <h3>Light Weapons (1 hand)</h3>
+      <ul>
+        <li
+          *ngFor="let weapon of availableLightWeapons"
+          pDraggable
+          (onDragStart)="dragStart(weapon)"
+          (onDragEnd)="dragEnd()"
+        >
+          {{ weapon.name }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>Heavy Weapons (+1 damage, 2 hands)</h3>
+      <ul>
+        <li
+          *ngFor="let weapon of availableHeavyWeapons"
+          pDraggable
+          (onDragStart)="dragStart(weapon)"
+          (onDragEnd)="dragEnd()"
+        >
+          {{ weapon.name }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>Ranged Weapons (2 hands)</h3>
+      <ul>
+        <li
+          *ngFor="let weapon of availableRangedWeapons"
+          pDraggable
+          (onDragStart)="dragStart(weapon)"
+          (onDragEnd)="dragEnd()"
+        >
+          {{ weapon.name }}
+        </li>
+      </ul>
+    </div>
   </div>
   <div>
     <h2>Character Items</h2>
