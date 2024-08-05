@@ -1,0 +1,106 @@
+[
+  {
+    "name": "Axe",
+    "type": "weapon",
+    "slots": 1,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Dagger",
+    "type": "weapon",
+    "slots": 1,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Mace",
+    "type": "weapon",
+    "slots": 1,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Short sword",
+    "type": "weapon",
+    "slots": 1,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Flail",
+    "type": "weapon",
+    "slots": 1,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "One-handed spear",
+    "type": "weapon",
+    "slots": 1,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Spear",
+    "type": "weapon",
+    "slots": 2,
+    "damage": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Halberd",
+    "type": "weapon",
+    "slots": 2,
+    "damage": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Long sword",
+    "type": "weapon",
+    "slots": 2,
+    "damage": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Warhammer",
+    "type": "weapon",
+    "slots": 2,
+    "damage": 1,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Bow",
+    "type": "weapon",
+    "slots": 2,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Crossbow",
+    "type": "weapon",
+    "slots": 2,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  },
+  {
+    "name": "Sling",
+    "type": "weapon",
+    "slots": 2,
+    "damage": 0,
+    "value": null,
+    "starter": true
+  }
+]
