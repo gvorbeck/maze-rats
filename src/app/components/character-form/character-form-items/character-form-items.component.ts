@@ -9,19 +9,21 @@ import { DragDropModule } from 'primeng/dragdrop';
   standalone: true,
   imports: [CommonModule, DragDropModule],
   templateUrl: './character-form-items.component.html',
-  styleUrl: './character-form-items.component.scss',
+  styleUrls: ['./character-form-items.component.scss'],
 })
 export class CharacterFormItemsComponent {
   @Output() itemsChanged = new EventEmitter<InventoryItem[]>();
 
   availableItems: InventoryItem[] | undefined;
-  selectedItems: InventoryItem[] | undefined;
+  handsItems: InventoryItem[] = [];
+  beltItems: InventoryItem[] = [];
+  wornItems: InventoryItem[] = [];
+  backpackItems: InventoryItem[] = [];
   draggedItem: InventoryItem | undefined | null;
 
   constructor(private inventoryService: InventoryService) {}
 
   ngOnInit(): void {
-    this.selectedItems = [];
     this.inventoryService
       .getStarterItems()
       .subscribe((data: InventoryItem[]) => {
@@ -33,18 +35,27 @@ export class CharacterFormItemsComponent {
     this.draggedItem = item;
   }
 
-  drop() {
-    // If the item is dropped in the selected items list, remove it from the available items list
-    // and add it to the selected items list
+  drop(area: string) {
     if (this.draggedItem) {
       let draggedItemIndex = this.findIndex(this.draggedItem);
-      this.selectedItems = [
-        ...(this.selectedItems as InventoryItem[]),
-        this.draggedItem,
-      ];
+      switch (area) {
+        case 'hands':
+          this.handsItems.push(this.draggedItem);
+          break;
+        case 'belt':
+          this.beltItems.push(this.draggedItem);
+          break;
+        case 'worn':
+          this.wornItems.push(this.draggedItem);
+          break;
+        case 'backpack':
+          this.backpackItems.push(this.draggedItem);
+          break;
+      }
       this.availableItems = this.availableItems?.filter(
-        (val, i) => i != draggedItemIndex
+        (val, i) => i !== draggedItemIndex
       );
+      this.itemsChanged.emit(this.getAllSelectedItems());
       this.draggedItem = null;
     }
   }
@@ -62,5 +73,14 @@ export class CharacterFormItemsComponent {
       }
     }
     return index;
+  }
+
+  getAllSelectedItems(): InventoryItem[] {
+    return [
+      ...this.handsItems,
+      ...this.beltItems,
+      ...this.wornItems,
+      ...this.backpackItems,
+    ];
   }
 }

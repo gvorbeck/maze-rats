@@ -14,15 +14,61 @@
   </div>
   <div>
     <h2>Character Items</h2>
-    <ul pDroppable (onDrop)="drop()" class="bg-slate-600 h-10 w-full">
-      <li
-        *ngFor="let item of selectedItems"
-        pDraggable
-        (onDragStart)="dragStart(item)"
-        (onDragEnd)="dragEnd()"
+    <div>
+      <h3>Hands</h3>
+      <ul pDroppable (onDrop)="drop('hands')" class="bg-slate-600 h-10 w-full">
+        <li
+          *ngFor="let item of handsItems"
+          pDraggable
+          (onDragStart)="dragStart(item)"
+          (onDragEnd)="dragEnd()"
+        >
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>Belt</h3>
+      <ul pDroppable (onDrop)="drop('belt')" class="bg-slate-600 h-10 w-full">
+        <li
+          *ngFor="let item of beltItems"
+          pDraggable
+          (onDragStart)="dragStart(item)"
+          (onDragEnd)="dragEnd()"
+        >
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>Worn</h3>
+      <ul pDroppable (onDrop)="drop('worn')" class="bg-slate-600 h-10 w-full">
+        <li
+          *ngFor="let item of wornItems"
+          pDraggable
+          (onDragStart)="dragStart(item)"
+          (onDragEnd)="dragEnd()"
+        >
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>Backpack</h3>
+      <ul
+        pDroppable
+        (onDrop)="drop('backpack')"
+        class="bg-slate-600 h-10 w-full"
       >
-        {{ item.name }}
-      </li>
-    </ul>
+        <li
+          *ngFor="let item of backpackItems"
+          pDraggable
+          (onDragStart)="dragStart(item)"
+          (onDragEnd)="dragEnd()"
+        >
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

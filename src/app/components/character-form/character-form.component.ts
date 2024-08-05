@@ -7,6 +7,7 @@ import { CharacterFormAbilitiesComponent } from './character-form-abilities/char
 import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
 import { CharacterFormFeatureComponent } from './character-form-feature/character-form-feature.component';
 import { CharacterFormItemsComponent } from './character-form-items/character-form-items.component';
+import { InventoryItem } from '../../models/inventory-item.model';
 
 interface CharacterStepperPanel {
   header: string;
@@ -131,5 +132,10 @@ export class CharacterFormComponent {
     if (feature !== undefined && feature !== 'path') {
       this.startingCharacter.feature = feature;
     }
+  }
+
+  onItemsChanged(items: InventoryItem[]) {
+    this.startingCharacter.items.unassigned = items;
+    console.log('startingCharacter:', this.startingCharacter);
   }
 }
