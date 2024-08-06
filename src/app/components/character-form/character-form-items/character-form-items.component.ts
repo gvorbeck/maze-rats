@@ -69,10 +69,7 @@ export class CharacterFormItemsComponent {
   drop(refund?: boolean) {
     if (!refund) {
       if (this.draggedItem && !this.itemsDisabled) {
-        let draggedItemIndex = this.findIndex(
-          this.draggedItem,
-          this.availableItems
-        );
+        let draggedItemIndex = this.findIndex(this.draggedItem);
         this.selectedItems = [
           ...(this.selectedItems as InventoryItem[]),
           this.draggedItem,
@@ -83,32 +80,17 @@ export class CharacterFormItemsComponent {
         this.draggedItem = null;
       }
     } else {
-      if (this.draggedItem) {
-        let draggedItemIndex = this.findIndex(
-          this.draggedItem,
-          this.selectedItems
-        );
-        this.availableItems = [
-          ...(this.availableItems as InventoryItem[]),
-          this.draggedItem,
-        ];
-        this.selectedItems = this.selectedItems?.filter(
-          (val, i) => i != draggedItemIndex
-        );
-        this.draggedItem = null;
-      }
+      // remove from selectedItems and add it back to availableItems
     }
     this.isDisabled('items');
   }
 
-  findIndex(item: InventoryItem, list: InventoryItem[] | undefined): number {
+  findIndex(item: InventoryItem) {
     let index = -1;
-    if (list) {
-      for (let i = 0; i < list.length; i++) {
-        if (item.name === list[i].name) {
-          index = i;
-          break;
-        }
+    for (let i = 0; i < (this.availableItems as InventoryItem[]).length; i++) {
+      if (item.name === (this.availableItems as InventoryItem[])[i].name) {
+        index = i;
+        break;
       }
     }
     return index;
