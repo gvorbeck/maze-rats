@@ -22,12 +22,13 @@
         (onDragEnd)="dragEnd()"
         class="flex gap-2 items-center"
       >
-        <span>{{ item.name }}</span
-        ><span *ngIf="item.amount"> ({{ item.amount }})</span>
+        <span>{{ item.name }}</span>
+        <span *ngIf="item.amount"> ({{ item.amount }})</span>
         <p-dropdown
           [options]="dropdownOptions"
           [(ngModel)]="item.location"
-          (onChange)="updateItemLocation(item, $event.value)"
+          (onChange)="onLocationChange(item, $event.value)"
+          placeholder="Select location"
         ></p-dropdown>
       </li>
     </ul>

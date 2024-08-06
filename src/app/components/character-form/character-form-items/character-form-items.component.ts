@@ -20,7 +20,7 @@ export class CharacterFormItemsComponent {
   selectedItems: InventoryItem[] = [];
   itemsDisabled: boolean = false;
   draggedItem: InventoryItem | null = null;
-  dropdownOptions = ['hands', 'belt', 'worn', 'backpack'];
+  dropdownOptions: string[] = ['hands', 'belt', 'worn', 'backpack'];
 
   constructor(private inventoryService: InventoryService) {}
 
@@ -44,7 +44,6 @@ export class CharacterFormItemsComponent {
     if (this.draggedItem) {
       if (!refund) {
         if (!this.itemsDisabled) {
-          this.draggedItem.location = 'unassigned';
           this.moveItem(
             this.draggedItem,
             this.availableItems,
@@ -60,8 +59,6 @@ export class CharacterFormItemsComponent {
       }
       this.draggedItem = null;
       this.isDisabled('items');
-      // Emit updated items
-      this.itemsChanged.emit(this.selectedItems);
     }
   }
 
@@ -79,27 +76,35 @@ export class CharacterFormItemsComponent {
     }
   }
 
-  updateItemLocation(
-    item: InventoryItem,
-    location: 'hands' | 'belt' | 'worn' | 'backpack'
-  ) {
-    // Ensure belt can only have 2 items
-    if (
-      location === 'belt' &&
-      this.selectedItems.filter((i) => i.location === 'belt').length >= 2
-    ) {
+  onLocationChange(item: InventoryItem, location: string) {
+    const currentHandsSlots = this.getTotalSlots('hands');
+    const newHandsSlots =
+      currentHandsSlots + (location === 'hands' ? item.slots! : 0);
+    const exceedsHandsCapacity = newHandsSlots > 2;
+
+    if (location === 'hands' && exceedsHandsCapacity) {
+      // Display an error message or handle the restriction as needed
+      console.error('Cannot assign more than 2 slots to hands.');
       return;
     }
 
-    // Ensure hands can only hold items with a total of 2 slots
-    const handSlots = this.selectedItems
-      .filter((i) => i.location === 'hands')
-      .reduce((acc, i) => acc + (i.slots || 0), 0);
-    if (location === 'hands' && handSlots + (item.slots || 0) > 2) {
-      return;
+    // Update item location
+    const selectedItem = this.selectedItems.find((i) => i.name === item.name);
+    if (selectedItem) {
+      selectedItem.location = location as
+        | 'hands'
+        | 'belt'
+        | 'worn'
+        | 'backpack';
     }
 
-    item.location = location;
-    this.itemsChanged.emit(this.selectedItems); // Emit updated items
+    // Emit updated items list
+    this.itemsChanged.emit(this.selectedItems);
+  }
+
+  getTotalSlots(location: string): number {
+    return this.selectedItems
+      .filter((item) => item.location === location)
+      .reduce((total, item) => total + item.slots!, 0);
   }
 }
