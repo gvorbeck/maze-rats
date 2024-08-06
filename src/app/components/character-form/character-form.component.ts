@@ -83,26 +83,26 @@ export class CharacterFormComponent {
   };
 
   stepperPanels: CharacterStepperPanel[] = [
-    {
-      header: 'Roll or Choose Abilities',
-      instruction:
-        "Your PC has 3 abilities: Strength, Dexterity, and Will. Roll 1d to find their starting values, or simply choose a row (with GM permission). You may raise one of your PC's abilities by one point at levels 2, 4, and 6. A PC's abilities may never be raised higher than +4.",
-      component: CharacterFormAbilitiesComponent,
-      name: 'abilities',
-    },
-    {
-      header: 'Record Maximum Health',
-      instruction:
-        'Your PC begins with 4 maximum health and 4 current health. PCs add 2 to their maximum health (but not current health) each time they gain a level.',
-      component: CharacterFormHealthComponent,
-      name: 'health',
-    },
-    {
-      header: 'Choose Starting Feature',
-      instruction: 'Your PC begins with one of the following features:',
-      component: CharacterFormFeatureComponent,
-      name: 'feature',
-    },
+    // {
+    //   header: 'Roll or Choose Abilities',
+    //   instruction:
+    //     "Your PC has 3 abilities: Strength, Dexterity, and Will. Roll 1d to find their starting values, or simply choose a row (with GM permission). You may raise one of your PC's abilities by one point at levels 2, 4, and 6. A PC's abilities may never be raised higher than +4.",
+    //   component: CharacterFormAbilitiesComponent,
+    //   name: 'abilities',
+    // },
+    // {
+    //   header: 'Record Maximum Health',
+    //   instruction:
+    //     'Your PC begins with 4 maximum health and 4 current health. PCs add 2 to their maximum health (but not current health) each time they gain a level.',
+    //   component: CharacterFormHealthComponent,
+    //   name: 'health',
+    // },
+    // {
+    //   header: 'Choose Starting Feature',
+    //   instruction: 'Your PC begins with one of the following features:',
+    //   component: CharacterFormFeatureComponent,
+    //   name: 'feature',
+    // },
     {
       header: 'Choose Starting Inventory',
       instruction:

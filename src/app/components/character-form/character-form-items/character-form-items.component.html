@@ -1,5 +1,5 @@
 <div class="flex gap-4">
-  <div>
+  <div pDroppable (onDrop)="drop()">
     <h2>Starting Items</h2>
     <ul>
       <li
@@ -12,7 +12,20 @@
       </li>
     </ul>
   </div>
-  <div>
+  <div pDroppable (onDrop)="drop()" [pDroppableDisabled]="itemsDisabled">
+    <h2>Practice Inventory</h2>
+    <ul *ngIf="selectedItems">
+      <li
+        *ngFor="let item of selectedItems"
+        pDraggable
+        (onDragStart)="dragStart(item)"
+        (onDragEnd)="dragEnd()"
+      >
+        {{ item.name }}<span *ngIf="item.amount"> ({{ item.amount }})</span>
+      </li>
+    </ul>
+  </div>
+  <!-- <div>
     <h2>Combat Gear</h2>
     <div>
       <h3>Light Weapons (1 hand)</h3>
@@ -20,8 +33,7 @@
         <li
           *ngFor="let weapon of availableLightWeapons"
           pDraggable
-          (onDragStart)="dragStart(weapon)"
-          (onDragEnd)="dragEnd()"
+
         >
           {{ weapon.name }}
         </li>
@@ -33,6 +45,7 @@
         <li
           *ngFor="let weapon of availableHeavyWeapons"
           pDraggable
+          [pDraggableDisabled]="!isDraggable()"
           (onDragStart)="dragStart(weapon)"
           (onDragEnd)="dragEnd()"
         >
@@ -46,6 +59,7 @@
         <li
           *ngFor="let weapon of availableRangedWeapons"
           pDraggable
+          [pDraggableDisabled]="!isDraggable()"
           (onDragStart)="dragStart(weapon)"
           (onDragEnd)="dragEnd()"
         >
@@ -53,64 +67,40 @@
         </li>
       </ul>
     </div>
-  </div>
-  <div>
+  </div> -->
+  <!-- <div>
     <h2>Character Items</h2>
     <div>
       <h3>Hands</h3>
-      <ul pDroppable (onDrop)="drop('hands')" class="bg-slate-600 h-10 w-full">
-        <li
-          *ngFor="let item of handsItems"
-          pDraggable
-          (onDragStart)="dragStart(item)"
-          (onDragEnd)="dragEnd()"
-        >
+      <ul class="bg-slate-600 h-10 w-full">
+        <li *ngFor="let item of handsItems">
           {{ item.name }}
         </li>
       </ul>
     </div>
     <div>
       <h3>Belt</h3>
-      <ul pDroppable (onDrop)="drop('belt')" class="bg-slate-600 h-10 w-full">
-        <li
-          *ngFor="let item of beltItems"
-          pDraggable
-          (onDragStart)="dragStart(item)"
-          (onDragEnd)="dragEnd()"
-        >
+      <ul class="bg-slate-600 h-10 w-full">
+        <li *ngFor="let item of beltItems">
           {{ item.name }}
         </li>
       </ul>
     </div>
     <div>
       <h3>Worn</h3>
-      <ul pDroppable (onDrop)="drop('worn')" class="bg-slate-600 h-10 w-full">
-        <li
-          *ngFor="let item of wornItems"
-          pDraggable
-          (onDragStart)="dragStart(item)"
-          (onDragEnd)="dragEnd()"
-        >
+      <ul class="bg-slate-600 h-10 w-full">
+        <li *ngFor="let item of wornItems">
           {{ item.name }}
         </li>
       </ul>
     </div>
     <div>
       <h3>Backpack</h3>
-      <ul
-        pDroppable
-        (onDrop)="drop('backpack')"
-        class="bg-slate-600 h-10 w-full"
-      >
-        <li
-          *ngFor="let item of backpackItems"
-          pDraggable
-          (onDragStart)="dragStart(item)"
-          (onDragEnd)="dragEnd()"
-        >
+      <ul class="bg-slate-600 h-10 w-full">
+        <li *ngFor="let item of backpackItems">
           {{ item.name }}
         </li>
       </ul>
     </div>
-  </div>
+  </div> -->
 </div>
