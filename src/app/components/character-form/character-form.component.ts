@@ -57,14 +57,8 @@ export class CharacterFormComponent {
     },
     health: 4,
     feature: null,
-    items: {
-      hands: [],
-      worn: [],
-      belt: [],
-      backpack: [],
-      gold: 0,
-      unassigned: [],
-    },
+    items: [],
+    gold: 0,
     details: {
       appearance: '',
       physical: '',
@@ -154,23 +148,7 @@ export class CharacterFormComponent {
     }
   }
 
-  onItemsChanged({
-    hands,
-    belt,
-    worn,
-    backpack,
-  }: {
-    hands: InventoryItem[];
-    belt: InventoryItem[];
-    worn: InventoryItem[];
-    backpack: InventoryItem[];
-  }) {
-    this.startingCharacter.items.hands = hands;
-    this.startingCharacter.items.belt = belt;
-    this.startingCharacter.items.worn = worn;
-    this.startingCharacter.items.backpack = backpack;
-    console.log('startingCharacter:', this.startingCharacter);
-  }
+  onItemsChanged() {}
 
   onNameChanged(name: string) {
     this.startingCharacter.name = name;

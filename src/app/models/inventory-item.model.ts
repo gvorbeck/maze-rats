@@ -17,4 +17,5 @@ export interface InventoryItem {
   value: number | null;
   starter?: boolean;
   amount?: number | string;
+  location: 'unassigned' | 'hands' | 'belt' | 'worn' | 'backpack';
 }

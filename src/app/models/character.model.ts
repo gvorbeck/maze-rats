@@ -26,14 +26,8 @@ export interface Character {
   };
   health: number;
   feature: Feature;
-  items: {
-    hands: InventoryItem[];
-    worn: InventoryItem[];
-    belt: InventoryItem[];
-    backpack: InventoryItem[];
-    gold: number;
-    unassigned: InventoryItem[];
-  };
+  items: InventoryItem[];
+  gold: number;
   details: {
     appearance: string;
     physical: string;

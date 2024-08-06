@@ -4,7 +4,6 @@ import { InventoryService } from '../../../services/inventory.service';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DropdownModule } from 'primeng/dropdown';
-import { Character } from '../../../models/character.model';
 
 @Component({
   selector: 'app-character-form-items',
@@ -25,21 +24,7 @@ export class CharacterFormItemsComponent {
   selectedItems: InventoryItem[] = [];
   itemsDisabled: boolean = false;
   draggedItem: InventoryItem | null = null;
-  dropdownOptions: (keyof Character['items'])[] = [
-    'unassigned',
-    'hands',
-    'belt',
-    'worn',
-    'backpack',
-  ];
-  inventory: Character['items'] = {
-    hands: [],
-    belt: [],
-    worn: [],
-    backpack: [],
-    gold: 0,
-    unassigned: [],
-  };
+  dropdownOptions: string[] = [];
 
   constructor(private inventoryService: InventoryService) {}
 
