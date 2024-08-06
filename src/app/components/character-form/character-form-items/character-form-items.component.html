@@ -1,7 +1,7 @@
 <div class="flex gap-4">
-  <div pDroppable (onDrop)="drop()">
+  <div>
     <h2>Starting Items</h2>
-    <ul>
+    <ul pDroppable (onDrop)="drop(true)">
       <li
         *ngFor="let item of availableItems"
         pDraggable
@@ -14,7 +14,7 @@
   </div>
   <div pDroppable (onDrop)="drop()" [pDroppableDisabled]="itemsDisabled">
     <h2>Practice Inventory</h2>
-    <ul *ngIf="selectedItems">
+    <ul *ngIf="selectedItems.length">
       <li
         *ngFor="let item of selectedItems"
         pDraggable
@@ -25,82 +25,4 @@
       </li>
     </ul>
   </div>
-  <!-- <div>
-    <h2>Combat Gear</h2>
-    <div>
-      <h3>Light Weapons (1 hand)</h3>
-      <ul>
-        <li
-          *ngFor="let weapon of availableLightWeapons"
-          pDraggable
-
-        >
-          {{ weapon.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Heavy Weapons (+1 damage, 2 hands)</h3>
-      <ul>
-        <li
-          *ngFor="let weapon of availableHeavyWeapons"
-          pDraggable
-          [pDraggableDisabled]="!isDraggable()"
-          (onDragStart)="dragStart(weapon)"
-          (onDragEnd)="dragEnd()"
-        >
-          {{ weapon.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Ranged Weapons (2 hands)</h3>
-      <ul>
-        <li
-          *ngFor="let weapon of availableRangedWeapons"
-          pDraggable
-          [pDraggableDisabled]="!isDraggable()"
-          (onDragStart)="dragStart(weapon)"
-          (onDragEnd)="dragEnd()"
-        >
-          {{ weapon.name }}
-        </li>
-      </ul>
-    </div>
-  </div> -->
-  <!-- <div>
-    <h2>Character Items</h2>
-    <div>
-      <h3>Hands</h3>
-      <ul class="bg-slate-600 h-10 w-full">
-        <li *ngFor="let item of handsItems">
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Belt</h3>
-      <ul class="bg-slate-600 h-10 w-full">
-        <li *ngFor="let item of beltItems">
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Worn</h3>
-      <ul class="bg-slate-600 h-10 w-full">
-        <li *ngFor="let item of wornItems">
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Backpack</h3>
-      <ul class="bg-slate-600 h-10 w-full">
-        <li *ngFor="let item of backpackItems">
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
-  </div> -->
 </div>
