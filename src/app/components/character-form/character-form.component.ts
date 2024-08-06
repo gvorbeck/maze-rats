@@ -148,7 +148,10 @@ export class CharacterFormComponent {
     }
   }
 
-  onItemsChanged() {}
+  onItemsChanged(updatedItems: InventoryItem[]) {
+    this.startingCharacter.items = updatedItems;
+    console.log('startingCharacter:', this.startingCharacter);
+  }
 
   onNameChanged(name: string) {
     this.startingCharacter.name = name;

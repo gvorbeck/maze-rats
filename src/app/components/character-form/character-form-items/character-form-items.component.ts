@@ -4,27 +4,23 @@ import { InventoryService } from '../../../services/inventory.service';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-character-form-items',
   standalone: true,
-  imports: [CommonModule, DragDropModule, DropdownModule],
+  imports: [CommonModule, DragDropModule, DropdownModule, FormsModule],
   templateUrl: './character-form-items.component.html',
   styleUrls: ['./character-form-items.component.scss'],
 })
 export class CharacterFormItemsComponent {
-  @Output() itemsChanged = new EventEmitter<{
-    hands: InventoryItem[];
-    belt: InventoryItem[];
-    worn: InventoryItem[];
-    backpack: InventoryItem[];
-  }>();
+  @Output() itemsChanged = new EventEmitter<InventoryItem[]>();
 
   availableItems: InventoryItem[] = [];
   selectedItems: InventoryItem[] = [];
   itemsDisabled: boolean = false;
   draggedItem: InventoryItem | null = null;
-  dropdownOptions: string[] = [];
+  dropdownOptions = ['hands', 'belt', 'worn', 'backpack'];
 
   constructor(private inventoryService: InventoryService) {}
 
@@ -48,6 +44,7 @@ export class CharacterFormItemsComponent {
     if (this.draggedItem) {
       if (!refund) {
         if (!this.itemsDisabled) {
+          this.draggedItem.location = 'unassigned';
           this.moveItem(
             this.draggedItem,
             this.availableItems,
@@ -63,6 +60,8 @@ export class CharacterFormItemsComponent {
       }
       this.draggedItem = null;
       this.isDisabled('items');
+      // Emit updated items
+      this.itemsChanged.emit(this.selectedItems);
     }
   }
 
@@ -78,5 +77,29 @@ export class CharacterFormItemsComponent {
     if (source === 'items') {
       this.itemsDisabled = this.selectedItems.length >= 6;
     }
+  }
+
+  updateItemLocation(
+    item: InventoryItem,
+    location: 'hands' | 'belt' | 'worn' | 'backpack'
+  ) {
+    // Ensure belt can only have 2 items
+    if (
+      location === 'belt' &&
+      this.selectedItems.filter((i) => i.location === 'belt').length >= 2
+    ) {
+      return;
+    }
+
+    // Ensure hands can only hold items with a total of 2 slots
+    const handSlots = this.selectedItems
+      .filter((i) => i.location === 'hands')
+      .reduce((acc, i) => acc + (i.slots || 0), 0);
+    if (location === 'hands' && handSlots + (item.slots || 0) > 2) {
+      return;
+    }
+
+    item.location = location;
+    this.itemsChanged.emit(this.selectedItems); // Emit updated items
   }
 }

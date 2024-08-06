@@ -24,7 +24,11 @@
       >
         <span>{{ item.name }}</span
         ><span *ngIf="item.amount"> ({{ item.amount }})</span>
-        <p-dropdown [options]="dropdownOptions" />
+        <p-dropdown
+          [options]="dropdownOptions"
+          [(ngModel)]="item.location"
+          (onChange)="updateItemLocation(item, $event.value)"
+        ></p-dropdown>
       </li>
     </ul>
   </div>

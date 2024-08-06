@@ -32,7 +32,9 @@
               />
             </ng-container>
             <ng-container *ngIf="panel.name === 'items'">
-              <app-character-form-items (itemsChanged)="onItemsChanged()" />
+              <app-character-form-items
+                (itemsChanged)="onItemsChanged($event)"
+              />
             </ng-container>
             <ng-container *ngIf="panel.name === 'details'">
               <app-character-form-details />
