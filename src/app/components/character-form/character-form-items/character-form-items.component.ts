@@ -21,7 +21,7 @@ export class CharacterFormItemsComponent {
   itemsDisabled: boolean = false;
   draggedItem: InventoryItem | null = null;
   dropdownOptions: string[] = ['hands', 'belt', 'worn', 'backpack'];
-  errorMessage: string | null = null;
+  errorMessages: string[] = [];
 
   constructor(private inventoryService: InventoryService) {}
 
@@ -87,34 +87,31 @@ export class CharacterFormItemsComponent {
     const newBeltItems = currentBeltItems + (location === 'belt' ? 1 : 0);
     const exceedsBeltCapacity = newBeltItems > 2;
 
+    this.errorMessages = [];
+
     if (location === 'hands' && exceedsHandsCapacity) {
-      // Set error message
-      this.errorMessage = 'Cannot assign more than 2 slots to hands.';
-      return;
+      this.errorMessages.push('Cannot assign more than 2 slots to hands.');
     }
 
     if (location === 'belt' && exceedsBeltCapacity) {
-      // Set error message
-      this.errorMessage = 'Cannot assign more than 2 items to belt.';
-      return;
+      this.errorMessages.push('Cannot assign more than 2 items to belt.');
     }
 
-    // Clear error message
-    this.errorMessage = null;
+    if (this.errorMessages.length === 0) {
+      // Update item location
+      const selectedItem = this.selectedItems.find((i) => i.name === item.name);
+      if (selectedItem) {
+        selectedItem.location = location as
+          | 'hands'
+          | 'belt'
+          | 'worn'
+          | 'backpack';
+      }
 
-    // Update item location
-    const selectedItem = this.selectedItems.find((i) => i.name === item.name);
-    if (selectedItem) {
-      selectedItem.location = location as
-        | 'hands'
-        | 'belt'
-        | 'worn'
-        | 'backpack';
+      // Emit updated items list
+      this.itemsChanged.emit(this.selectedItems);
+      this.validateInventory();
     }
-
-    // Emit updated items list
-    this.itemsChanged.emit(this.selectedItems);
-    this.validateInventory();
   }
 
   getTotalSlots(location: string): number {
@@ -128,11 +125,11 @@ export class CharacterFormItemsComponent {
     const beltItems = this.selectedItems.filter(
       (item) => item.location === 'belt'
     ).length;
-    this.errorMessage =
-      handsSlots > 2 ? 'Cannot assign more than 2 slots to hands.' : null;
-    if (!this.errorMessage) {
-      this.errorMessage =
-        beltItems > 2 ? 'Cannot assign more than 2 items to belt.' : null;
+    if (handsSlots > 2) {
+      this.errorMessages.push('Cannot assign more than 2 slots to hands.');
+    }
+    if (beltItems > 2) {
+      this.errorMessages.push('Cannot assign more than 2 items to belt.');
     }
   }
 }

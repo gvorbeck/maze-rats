@@ -33,8 +33,10 @@
       </li>
     </ul>
   </div>
-  <!-- Display error message if any -->
-  <div *ngIf="errorMessage" class="text-red-500">
-    {{ errorMessage }}
+  <!-- Display error messages if any -->
+  <div *ngIf="errorMessages.length > 0" class="text-red-500">
+    <ul>
+      <li *ngFor="let error of errorMessages">{{ error }}</li>
+    </ul>
   </div>
 </div>
