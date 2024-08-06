@@ -148,8 +148,8 @@ export class CharacterFormComponent {
     }
   }
 
-  onItemsChanged(updatedItems: InventoryItem[]) {
-    this.startingCharacter.items = updatedItems;
+  onItemsChanged(items: InventoryItem[]) {
+    this.startingCharacter.items = items;
     console.log('startingCharacter:', this.startingCharacter);
   }
 
@@ -160,7 +160,7 @@ export class CharacterFormComponent {
 
   isNextDisabled(panelIndex: number): boolean {
     const panel = this.stepperPanels[panelIndex];
-    let outcome = true;
+    let outcome = false;
     switch (panel.name) {
       case 'abilities':
         outcome =
@@ -176,7 +176,18 @@ export class CharacterFormComponent {
       case 'feature':
         outcome = this.startingCharacter.feature === null;
         break;
+      case 'items':
+        const handsSlots = this.getTotalSlots('hands');
+        console.log('handsSlots:', handsSlots);
+        outcome = handsSlots > 2;
+        break;
     }
     return outcome;
+  }
+
+  getTotalSlots(location: string): number {
+    return this.startingCharacter.items
+      .filter((item) => item.location === location)
+      .reduce((total, item) => total + item.slots!, 0);
   }
 }

@@ -21,6 +21,7 @@ export class CharacterFormItemsComponent {
   itemsDisabled: boolean = false;
   draggedItem: InventoryItem | null = null;
   dropdownOptions: string[] = ['hands', 'belt', 'worn', 'backpack'];
+  errorMessage: string | null = null;
 
   constructor(private inventoryService: InventoryService) {}
 
@@ -78,15 +79,16 @@ export class CharacterFormItemsComponent {
 
   onLocationChange(item: InventoryItem, location: string) {
     const currentHandsSlots = this.getTotalSlots('hands');
-    const newHandsSlots =
-      currentHandsSlots + (location === 'hands' ? item.slots! : 0);
-    const exceedsHandsCapacity = newHandsSlots > 2;
+    const exceedsHandsCapacity = currentHandsSlots > 2;
 
     if (location === 'hands' && exceedsHandsCapacity) {
-      // Display an error message or handle the restriction as needed
-      console.error('Cannot assign more than 2 slots to hands.');
+      // Set error message
+      this.errorMessage = 'Cannot assign more than 2 slots to hands.';
       return;
     }
+
+    // Clear error message
+    this.errorMessage = null;
 
     // Update item location
     const selectedItem = this.selectedItems.find((i) => i.name === item.name);

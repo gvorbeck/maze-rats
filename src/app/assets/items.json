@@ -10,7 +10,7 @@
   {
     "name": "Bear Trap",
     "type": "item",
-    "slots": 2,
+    "slots": 1,
     "value": null,
     "starter": true,
     "location": null
@@ -250,7 +250,7 @@
   {
     "name": "Ten Foot Pole",
     "type": "item",
-    "slots": 2,
+    "slots": 1,
     "value": null,
     "starter": true,
     "location": null
