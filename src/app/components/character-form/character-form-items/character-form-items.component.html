@@ -20,8 +20,11 @@
         pDraggable
         (onDragStart)="dragStart(item)"
         (onDragEnd)="dragEnd()"
+        class="flex gap-2 items-center"
       >
-        {{ item.name }}<span *ngIf="item.amount"> ({{ item.amount }})</span>
+        <span>{{ item.name }}</span
+        ><span *ngIf="item.amount"> ({{ item.amount }})</span>
+        <p-dropdown [options]="dropdownOptions" />
       </li>
     </ul>
   </div>
