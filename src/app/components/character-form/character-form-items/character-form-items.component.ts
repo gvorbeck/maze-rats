@@ -60,6 +60,7 @@ export class CharacterFormItemsComponent {
       }
       this.draggedItem = null;
       this.isDisabled('items');
+      this.validateInventory();
     }
   }
 
@@ -78,12 +79,23 @@ export class CharacterFormItemsComponent {
   }
 
   onLocationChange(item: InventoryItem, location: string) {
-    const currentHandsSlots = this.getTotalSlots('hands');
-    const exceedsHandsCapacity = currentHandsSlots > 2;
+    const exceedsHandsCapacity = this.getTotalSlots('hands') > 2;
+
+    const currentBeltItems = this.selectedItems.filter(
+      (i) => i.location === 'belt'
+    ).length;
+    const newBeltItems = currentBeltItems + (location === 'belt' ? 1 : 0);
+    const exceedsBeltCapacity = newBeltItems > 2;
 
     if (location === 'hands' && exceedsHandsCapacity) {
       // Set error message
       this.errorMessage = 'Cannot assign more than 2 slots to hands.';
+      return;
+    }
+
+    if (location === 'belt' && exceedsBeltCapacity) {
+      // Set error message
+      this.errorMessage = 'Cannot assign more than 2 items to belt.';
       return;
     }
 
@@ -102,11 +114,25 @@ export class CharacterFormItemsComponent {
 
     // Emit updated items list
     this.itemsChanged.emit(this.selectedItems);
+    this.validateInventory();
   }
 
   getTotalSlots(location: string): number {
     return this.selectedItems
       .filter((item) => item.location === location)
       .reduce((total, item) => total + item.slots!, 0);
+  }
+
+  validateInventory() {
+    const handsSlots = this.getTotalSlots('hands');
+    const beltItems = this.selectedItems.filter(
+      (item) => item.location === 'belt'
+    ).length;
+    this.errorMessage =
+      handsSlots > 2 ? 'Cannot assign more than 2 slots to hands.' : null;
+    if (!this.errorMessage) {
+      this.errorMessage =
+        beltItems > 2 ? 'Cannot assign more than 2 items to belt.' : null;
+    }
   }
 }

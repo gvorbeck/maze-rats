@@ -77,26 +77,6 @@ export class CharacterFormComponent {
   };
 
   stepperPanels: CharacterStepperPanel[] = [
-    // {
-    //   header: 'Roll or Choose Abilities',
-    //   instruction:
-    //     "Your PC has 3 abilities: Strength, Dexterity, and Will. Roll 1d to find their starting values, or simply choose a row (with GM permission). You may raise one of your PC's abilities by one point at levels 2, 4, and 6. A PC's abilities may never be raised higher than +4.",
-    //   component: CharacterFormAbilitiesComponent,
-    //   name: 'abilities',
-    // },
-    // {
-    //   header: 'Record Maximum Health',
-    //   instruction:
-    //     'Your PC begins with 4 maximum health and 4 current health. PCs add 2 to their maximum health (but not current health) each time they gain a level.',
-    //   component: CharacterFormHealthComponent,
-    //   name: 'health',
-    // },
-    // {
-    //   header: 'Choose Starting Feature',
-    //   instruction: 'Your PC begins with one of the following features:',
-    //   component: CharacterFormFeatureComponent,
-    //   name: 'feature',
-    // },
     {
       header: 'Choose Starting Inventory',
       instruction:
@@ -115,7 +95,7 @@ export class CharacterFormComponent {
       header: 'Name Your Character',
       instruction:
         'Your character starts at level 1 and has 0 XP. Give your character a name.',
-      component: null,
+      component: CharacterFormNameComponent,
       name: 'name',
     },
   ];
@@ -164,8 +144,8 @@ export class CharacterFormComponent {
     switch (panel.name) {
       case 'abilities':
         outcome =
-          this.startingCharacter.abilities.str.value === null &&
-          this.startingCharacter.abilities.dex.value === null &&
+          this.startingCharacter.abilities.str.value === null ||
+          this.startingCharacter.abilities.dex.value === null ||
           this.startingCharacter.abilities.wil.value === null;
         break;
       case 'health':
@@ -178,8 +158,8 @@ export class CharacterFormComponent {
         break;
       case 'items':
         const handsSlots = this.getTotalSlots('hands');
-        console.log('handsSlots:', handsSlots);
-        outcome = handsSlots > 2;
+        const beltItems = this.getTotalItems('belt');
+        outcome = handsSlots > 2 || beltItems > 2;
         break;
     }
     return outcome;
@@ -189,5 +169,11 @@ export class CharacterFormComponent {
     return this.startingCharacter.items
       .filter((item) => item.location === location)
       .reduce((total, item) => total + item.slots!, 0);
+  }
+
+  getTotalItems(location: string): number {
+    return this.startingCharacter.items.filter(
+      (item) => item.location === location
+    ).length;
   }
 }
