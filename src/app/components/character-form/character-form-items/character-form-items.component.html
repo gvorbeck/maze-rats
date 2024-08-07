@@ -52,7 +52,7 @@
         <p-button
           label="Add"
           (onClick)="addWeapon(weapon)"
-          [disabled]="numWeapons >= 2"
+          [disabled]="validateWeapon()"
         ></p-button>
       </li>
     </ul>

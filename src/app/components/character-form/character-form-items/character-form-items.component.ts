@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
-import { WeaponInputComponent } from './weapon-input/weapon-input.component';
 import { ButtonModule } from 'primeng/button';
 
 type Weapon = 'light-weapon' | 'heavy-weapon' | 'ranged-weapon';
@@ -19,7 +18,6 @@ type Location = 'hands' | 'belt' | 'worn' | 'backpack';
     DragDropModule,
     DropdownModule,
     FormsModule,
-    WeaponInputComponent,
     ButtonModule,
   ],
   templateUrl: './character-form-items.component.html',
@@ -193,5 +191,19 @@ export class CharacterFormItemsComponent {
     this.selectedItems.push(newWeapon);
     this.validateInventory();
     this.itemsChanged.emit(this.selectedItems);
+  }
+
+  validateWeapon() {
+    let invalid = false;
+    if (
+      this.weapon.name === '' ||
+      this.weapon.type === null ||
+      this.weapon.location === null ||
+      this.numWeapons >= 2
+    ) {
+      invalid = true;
+    }
+
+    return invalid;
   }
 }
