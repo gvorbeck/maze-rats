@@ -38,6 +38,15 @@ export class CharacterFormDetailsComponent {
     mannerism: '',
   };
 
+  selectedMode: { [key in Details]: string } = {
+    appearance: 'manual',
+    physical: 'manual',
+    background: 'manual',
+    clothing: 'manual',
+    personality: 'manual',
+    mannerism: 'manual',
+  };
+
   detailsForm = [
     {
       label: 'Appearance',
@@ -292,14 +301,16 @@ export class CharacterFormDetailsComponent {
     },
   ];
 
-  onRadioChange(event: any, name: Details) {
-    this.details[name] = event.value;
+  onRadioChange(event: any, name: Details, mode: string) {
+    this.selectedMode[name] = mode;
   }
 
   randomize(detailName: Details, options: string[]) {
+    console.log('randomize', detailName, options);
     if (options.length > 0) {
       const randomOption = options[Math.floor(Math.random() * options.length)];
       this.details[detailName] = randomOption;
+      this.selectedMode[detailName] = 'random';
     }
   }
 }

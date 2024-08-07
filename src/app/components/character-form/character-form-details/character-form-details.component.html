@@ -6,9 +6,9 @@
       <p-radioButton
         name="details-{{ detail.name }}"
         value="random"
-        [(ngModel)]="details[detail.name]"
+        [(ngModel)]="selectedMode[detail.name]"
         inputId="random-{{ detail.name }}"
-        (onClick)="randomize(detail.name, detail.options)"
+        (onClick)="onRadioChange($event, detail.name, 'random')"
       ></p-radioButton>
       <p-button
         label="Randomize"
@@ -25,8 +25,9 @@
       <p-radioButton
         name="details-{{ detail.name }}"
         value="manual"
-        [(ngModel)]="details[detail.name]"
+        [(ngModel)]="selectedMode[detail.name]"
         inputId="manual-{{ detail.name }}"
+        (onClick)="onRadioChange($event, detail.name, 'manual')"
       ></p-radioButton>
       <input
         type="text"
