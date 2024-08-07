@@ -31,6 +31,7 @@ export class WeaponInputComponent {
   }>();
 
   addWeapon() {
+    console.log('numWeapons', this.numWeapons);
     this.weaponAdded.emit(this.weapon);
     this.weapon = { name: '', type: 'light-weapon', location: 'hands' };
   }

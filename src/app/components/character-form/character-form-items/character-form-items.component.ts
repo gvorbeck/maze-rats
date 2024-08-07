@@ -6,6 +6,7 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { WeaponInputComponent } from './weapon-input/weapon-input.component';
+import { ButtonModule } from 'primeng/button';
 
 type Weapon = 'light-weapon' | 'heavy-weapon' | 'ranged-weapon';
 type Location = 'hands' | 'belt' | 'worn' | 'backpack';
@@ -19,6 +20,7 @@ type Location = 'hands' | 'belt' | 'worn' | 'backpack';
     DropdownModule,
     FormsModule,
     WeaponInputComponent,
+    ButtonModule,
   ],
   templateUrl: './character-form-items.component.html',
   styleUrls: ['./character-form-items.component.scss'],
@@ -46,12 +48,11 @@ export class CharacterFormItemsComponent {
   ];
   errorMessages: string[] = [];
   numWeapons = 0;
-  // numWeapons = this.selectedItems.filter(
-  //   (item) =>
-  //     item.type === this.lightWeapon ||
-  //     item.type === this.heavyWeapon ||
-  //     item.type === this.rangedWeapon
-  // ).length;
+  weapon = {
+    name: '',
+    type: null,
+    location: null,
+  };
 
   constructor(private inventoryService: InventoryService) {}
 
@@ -164,9 +165,19 @@ export class CharacterFormItemsComponent {
     if (beltItems > 2) {
       this.errorMessages.push('Cannot assign more than 2 items to belt.');
     }
+    this.numWeapons = this.selectedItems.filter(
+      (item) =>
+        item.type === this.lightWeapon ||
+        item.type === this.heavyWeapon ||
+        item.type === this.rangedWeapon
+    ).length;
   }
 
-  addWeapon(weapon: { name: string; type: string; location: string }) {
+  addWeapon(weapon: {
+    name: string;
+    type: string | null;
+    location: string | null;
+  }) {
     const slots = weapon.type === this.lightWeapon ? 1 : 2;
     const damage = weapon.type === this.heavyWeapon ? 1 : 0;
 
@@ -180,12 +191,7 @@ export class CharacterFormItemsComponent {
     };
 
     this.selectedItems.push(newWeapon);
-    this.numWeapons = this.selectedItems.filter(
-      (item) =>
-        item.type === this.lightWeapon ||
-        item.type === this.heavyWeapon ||
-        item.type === this.rangedWeapon
-    ).length;
+    this.validateInventory();
     this.itemsChanged.emit(this.selectedItems);
   }
 }

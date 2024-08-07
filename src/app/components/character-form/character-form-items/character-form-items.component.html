@@ -32,12 +32,29 @@
         ></p-dropdown>
       </li>
       <!-- Weapon input fields -->
-      <app-weapon-input
-        [weaponDropdownOptions]="weaponDropdownOptions"
-        [locationDropdownOptions]="dropdownOptions"
-        [numWeapons]="numWeapons"
-        (weaponAdded)="addWeapon($event)"
-      ></app-weapon-input>
+      <li class="flex gap-2 items-center">
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="weapon.name"
+          placeholder="Weapon 1 Name"
+        />
+        <p-dropdown
+          [options]="weaponDropdownOptions"
+          [(ngModel)]="weapon.type"
+          placeholder="Type"
+        ></p-dropdown>
+        <p-dropdown
+          [options]="dropdownOptions"
+          [(ngModel)]="weapon.location"
+          placeholder="Location"
+        ></p-dropdown>
+        <p-button
+          label="Add"
+          (onClick)="addWeapon(weapon)"
+          [disabled]="numWeapons >= 2"
+        ></p-button>
+      </li>
     </ul>
   </div>
   <!-- Display error messages if any -->
