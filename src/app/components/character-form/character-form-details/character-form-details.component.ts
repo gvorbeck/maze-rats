@@ -310,6 +310,11 @@ export class CharacterFormDetailsComponent {
     this.selectedMode[detailName] = 'manual';
   }
 
+  onDropdownChange(event: any, detailName: Details) {
+    this.details[detailName] = event.value;
+    this.selectedMode[detailName] = 'random';
+  }
+
   randomize(detailName: Details, options: string[]) {
     if (options.length > 0) {
       const randomOption = options[Math.floor(Math.random() * options.length)];

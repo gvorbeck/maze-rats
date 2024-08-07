@@ -17,7 +17,7 @@
       <p-dropdown
         [options]="detail.options"
         [(ngModel)]="details[detail.name]"
-        (onChange)="onRadioChange($event, detail.name, 'dropdown')"
+        (onChange)="onDropdownChange($event, detail.name)"
         placeholder="Select {{ detail.label }}"
       ></p-dropdown>
     </div>
