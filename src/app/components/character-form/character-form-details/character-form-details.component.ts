@@ -305,8 +305,12 @@ export class CharacterFormDetailsComponent {
     this.selectedMode[name] = mode;
   }
 
+  onInputChange(detailName: Details, value: string) {
+    this.details[detailName] = value;
+    this.selectedMode[detailName] = 'manual';
+  }
+
   randomize(detailName: Details, options: string[]) {
-    console.log('randomize', detailName, options);
     if (options.length > 0) {
       const randomOption = options[Math.floor(Math.random() * options.length)];
       this.details[detailName] = randomOption;

@@ -17,6 +17,7 @@
       <p-dropdown
         [options]="detail.options"
         [(ngModel)]="details[detail.name]"
+        (onChange)="onRadioChange($event, detail.name, 'dropdown')"
         placeholder="Select {{ detail.label }}"
       ></p-dropdown>
     </div>
@@ -33,6 +34,7 @@
         type="text"
         pInputText
         [(ngModel)]="details[detail.name]"
+        (ngModelChange)="onInputChange(detail.name, $event)"
         placeholder="Enter {{ detail.label }}"
       />
     </div>
