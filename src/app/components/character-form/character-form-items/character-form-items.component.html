@@ -14,7 +14,7 @@
   </div>
   <div pDroppable (onDrop)="drop()" [pDroppableDisabled]="itemsDisabled">
     <h2>Practice Inventory</h2>
-    <ul>
+    <ul class="flex flex-col gap-4">
       <li
         *ngFor="let item of selectedItems"
         pDraggable
@@ -31,17 +31,44 @@
           placeholder="Select location"
         ></p-dropdown>
       </li>
+      <!-- Weapon input fields -->
       <li class="flex gap-2 items-center">
-        <!-- weapon input #1 -->
-        <!-- weapon type dropdown: light, heavy, ranged -->
-        <!-- location dropdown -->
-        <!-- add button -->
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="weapon1.name"
+          placeholder="Weapon 1 Name"
+        />
+        <p-dropdown
+          [options]="weaponDropdownOptions"
+          [(ngModel)]="weapon1.type"
+          placeholder="Type"
+        ></p-dropdown>
+        <p-dropdown
+          [options]="dropdownOptions"
+          [(ngModel)]="weapon1.location"
+          placeholder="Location"
+        ></p-dropdown>
+        <p-button label="Add" (onClick)="addWeapon(weapon1)"></p-button>
       </li>
       <li class="flex gap-2 items-center">
-        <!-- weapon input #2 -->
-        <!-- weapon type dropdown: light, heavy, ranged -->
-        <!-- location dropdown -->
-        <!-- add button -->
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="weapon2.name"
+          placeholder="Weapon 2 Name"
+        />
+        <p-dropdown
+          [options]="weaponDropdownOptions"
+          [(ngModel)]="weapon2.type"
+          placeholder="Type"
+        ></p-dropdown>
+        <p-dropdown
+          [options]="dropdownOptions"
+          [(ngModel)]="weapon2.location"
+          placeholder="Location"
+        ></p-dropdown>
+        <p-button label="Add" (onClick)="addWeapon(weapon2)"></p-button>
       </li>
     </ul>
   </div>
