@@ -32,44 +32,16 @@
         ></p-dropdown>
       </li>
       <!-- Weapon input fields -->
-      <li class="flex gap-2 items-center">
-        <input
-          type="text"
-          pInputText
-          [(ngModel)]="weapon1.name"
-          placeholder="Weapon 1 Name"
-        />
-        <p-dropdown
-          [options]="weaponDropdownOptions"
-          [(ngModel)]="weapon1.type"
-          placeholder="Type"
-        ></p-dropdown>
-        <p-dropdown
-          [options]="dropdownOptions"
-          [(ngModel)]="weapon1.location"
-          placeholder="Location"
-        ></p-dropdown>
-        <p-button label="Add" (onClick)="addWeapon(weapon1)"></p-button>
-      </li>
-      <li class="flex gap-2 items-center">
-        <input
-          type="text"
-          pInputText
-          [(ngModel)]="weapon2.name"
-          placeholder="Weapon 2 Name"
-        />
-        <p-dropdown
-          [options]="weaponDropdownOptions"
-          [(ngModel)]="weapon2.type"
-          placeholder="Type"
-        ></p-dropdown>
-        <p-dropdown
-          [options]="dropdownOptions"
-          [(ngModel)]="weapon2.location"
-          placeholder="Location"
-        ></p-dropdown>
-        <p-button label="Add" (onClick)="addWeapon(weapon2)"></p-button>
-      </li>
+      <app-weapon-input
+        [weaponDropdownOptions]="weaponDropdownOptions"
+        [locationDropdownOptions]="dropdownOptions"
+        (weaponAdded)="addWeapon($event)"
+      ></app-weapon-input>
+      <app-weapon-input
+        [weaponDropdownOptions]="weaponDropdownOptions"
+        [locationDropdownOptions]="dropdownOptions"
+        (weaponAdded)="addWeapon($event)"
+      ></app-weapon-input>
     </ul>
   </div>
   <!-- Display error messages if any -->

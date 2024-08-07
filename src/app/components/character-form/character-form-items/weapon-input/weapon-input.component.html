@@ -1,0 +1,19 @@
+<li class="flex gap-2 items-center">
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="weapon.name"
+    placeholder="Weapon Name"
+  />
+  <p-dropdown
+    [options]="weaponDropdownOptions"
+    [(ngModel)]="weapon.type"
+    placeholder="Type"
+  ></p-dropdown>
+  <p-dropdown
+    [options]="locationDropdownOptions"
+    [(ngModel)]="weapon.location"
+    placeholder="Location"
+  ></p-dropdown>
+  <p-button label="Add" (onClick)="addWeapon()"></p-button>
+</li>

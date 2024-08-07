@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
+import { WeaponInputComponent } from './weapon-input/weapon-input.component';
 
 @Component({
   selector: 'app-character-form-items',
@@ -15,7 +15,7 @@ import { ButtonModule } from 'primeng/button';
     DragDropModule,
     DropdownModule,
     FormsModule,
-    ButtonModule,
+    WeaponInputComponent,
   ],
   templateUrl: './character-form-items.component.html',
   styleUrls: ['./character-form-items.component.scss'],
@@ -34,9 +34,6 @@ export class CharacterFormItemsComponent {
     'ranged-weapon',
   ];
   errorMessages: string[] = [];
-
-  weapon1 = { name: '', type: 'light-weapon', location: 'hands' };
-  weapon2 = { name: '', type: 'light-weapon', location: 'hands' };
 
   constructor(private inventoryService: InventoryService) {}
 
