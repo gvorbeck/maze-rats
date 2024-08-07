@@ -90,6 +90,7 @@ export class CharacterFormItemsComponent {
       this.draggedItem = null;
       this.isDisabled('items');
       this.validateInventory();
+      this.itemsChanged.emit(this.selectedItems);
     }
   }
 

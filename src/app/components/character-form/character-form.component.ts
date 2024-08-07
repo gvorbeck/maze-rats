@@ -159,9 +159,9 @@ export class CharacterFormComponent {
       case 'items':
         const handsSlots = this.getTotalSlots('hands');
         const beltItems = this.getTotalItems('belt');
-        const noLocationItems = !!this.startingCharacter.items.filter(
+        const noLocationItems = this.startingCharacter.items.some(
           (item) => item.location === null
-        ).length;
+        );
         outcome = handsSlots > 2 || beltItems > 2 || noLocationItems;
         break;
     }
