@@ -37,7 +37,9 @@
               />
             </ng-container>
             <ng-container *ngIf="panel.name === 'details'">
-              <app-character-form-details />
+              <app-character-form-details
+                (detailsChanged)="onDetailsChanged($event)"
+              />
             </ng-container>
             <ng-container *ngIf="panel.name === 'name'">
               <app-character-form-name (nameChanged)="onNameChanged($event)" />

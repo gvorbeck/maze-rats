@@ -17,6 +17,14 @@ export type Feature =
   | 'path'
   | null;
 
+export type Details =
+  | 'appearance'
+  | 'physical'
+  | 'background'
+  | 'clothing'
+  | 'personality'
+  | 'mannerism';
+
 export interface Character {
   id: string;
   abilities: {

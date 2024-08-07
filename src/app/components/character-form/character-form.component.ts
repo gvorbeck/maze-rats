@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
-import { Character, AbilityKey, Feature } from '../../models/character.model';
+import {
+  Character,
+  AbilityKey,
+  Feature,
+  Details,
+} from '../../models/character.model';
 import { CharacterFormAbilitiesComponent } from './character-form-abilities/character-form-abilities.component';
 import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
 import { CharacterFormFeatureComponent } from './character-form-feature/character-form-feature.component';
@@ -150,6 +155,11 @@ export class CharacterFormComponent {
 
   onItemsChanged(items: InventoryItem[]) {
     this.startingCharacter.items = items;
+    console.log('startingCharacter:', this.startingCharacter);
+  }
+
+  onDetailsChanged(details: { [keyof in Details]: string }) {
+    this.startingCharacter.details = details;
     console.log('startingCharacter:', this.startingCharacter);
   }
 
