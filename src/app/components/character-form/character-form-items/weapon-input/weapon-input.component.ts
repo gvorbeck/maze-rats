@@ -22,7 +22,9 @@ export class WeaponInputComponent {
   @Input() weapon = { name: '', type: 'light-weapon', location: 'hands' };
   @Input() weaponDropdownOptions: string[] = [];
   @Input() locationDropdownOptions: string[] = [];
-  @Output() weaponAdded = new EventEmitter<{
+  @Input() numWeapons: number = 0;
+  @Output()
+  weaponAdded = new EventEmitter<{
     name: string;
     type: string;
     location: string;

@@ -35,11 +35,7 @@
       <app-weapon-input
         [weaponDropdownOptions]="weaponDropdownOptions"
         [locationDropdownOptions]="dropdownOptions"
-        (weaponAdded)="addWeapon($event)"
-      ></app-weapon-input>
-      <app-weapon-input
-        [weaponDropdownOptions]="weaponDropdownOptions"
-        [locationDropdownOptions]="dropdownOptions"
+        [numWeapons]="numWeapons"
         (weaponAdded)="addWeapon($event)"
       ></app-weapon-input>
     </ul>
