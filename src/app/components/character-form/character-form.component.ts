@@ -209,4 +209,16 @@ export class CharacterFormComponent {
       (item) => item.location === location
     ).length;
   }
+
+  // Version 2
+  // With an [appearance] look, [Character Name] carries themselves with a [physical] presence. Coming from a background as a [background], they wear [clothing] attire that complements their [personality] nature. They are known for their [mannerism] way of interacting with others.
+
+  // Version 3
+  // [Character Name]’s [appearance] visage pairs well with their [physical] build, a hallmark of their [background] upbringing. They are usually dressed in [clothing], reflecting a [personality] demeanor. One cannot miss their distinctive [mannerism] mannerisms that define their social interactions.
+
+  // Version 4
+  // The [appearance] look of [Character Name] is matched by their [physical] stature, indicative of their life as a [background]. Their choice of [clothing] attire highlights their [personality] character. Their [mannerism] way of speaking or acting is something many notice.
+
+  // Version 5
+  // [Character Name] boasts an [appearance] look and a [physical] physique, both shaped by their [background]. Their [clothing] is always a nod to their [personality] tendencies. What sets them apart is their [mannerism] habit, making them easily recognizable.
 }
