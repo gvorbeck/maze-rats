@@ -18,6 +18,18 @@ export class CharacterFormFeatureComponent {
   path: Feature | null = null;
 
   onFeatureChange(feature: Feature) {
+    console.log('Feature changed:', feature);
+
+    if (feature !== 'path') {
+      this.path = null; // Clear selected path if the feature is not 'path'
+    }
+
     this.featureChanged.emit(feature);
+  }
+
+  onPathChange(path: Feature) {
+    console.log('Path changed:', path);
+    this.path = path;
+    this.featureChanged.emit(path);
   }
 }

@@ -1,18 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-
-type Details =
-  | 'appearance'
-  | 'physical'
-  | 'background'
-  | 'clothing'
-  | 'personality'
-  | 'mannerism';
+import { Details } from '../../../models/character.model';
 
 @Component({
   selector: 'app-character-form-details',
@@ -29,6 +22,8 @@ type Details =
   styleUrls: ['./character-form-details.component.scss'],
 })
 export class CharacterFormDetailsComponent {
+  @Output() detailsChanged = new EventEmitter<{ [key in Details]: string }>();
+
   details: { [key in Details]: string } = {
     appearance: '',
     physical: '',
@@ -36,6 +31,15 @@ export class CharacterFormDetailsComponent {
     clothing: '',
     personality: '',
     mannerism: '',
+  };
+
+  selectedMode: { [key in Details]: string } = {
+    appearance: 'manual',
+    physical: 'manual',
+    background: 'manual',
+    clothing: 'manual',
+    personality: 'manual',
+    mannerism: 'manual',
   };
 
   detailsForm = [
@@ -292,14 +296,33 @@ export class CharacterFormDetailsComponent {
     },
   ];
 
-  onRadioChange(event: any, name: Details) {
-    this.details[name] = event.value;
+  onRadioChange(event: any, name: Details, mode: string) {
+    this.selectedMode[name] = mode;
+    this.emitDetails();
+  }
+
+  onInputChange(detailName: Details, value: string) {
+    this.details[detailName] = value;
+    this.selectedMode[detailName] = 'manual';
+    this.emitDetails();
+  }
+
+  onDropdownChange(event: any, detailName: Details) {
+    this.details[detailName] = event.value;
+    this.selectedMode[detailName] = 'random';
+    this.emitDetails();
   }
 
   randomize(detailName: Details, options: string[]) {
     if (options.length > 0) {
       const randomOption = options[Math.floor(Math.random() * options.length)];
       this.details[detailName] = randomOption;
+      this.selectedMode[detailName] = 'random';
+      this.emitDetails();
     }
+  }
+
+  emitDetails() {
+    this.detailsChanged.emit(this.details);
   }
 }

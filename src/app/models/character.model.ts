@@ -4,7 +4,7 @@ import { Spell } from './spell.model';
 export interface Ability {
   long: string;
   short: string;
-  value: number;
+  value: number | null;
 }
 
 export type Feature =
@@ -15,7 +15,15 @@ export type Feature =
   | 'roofrunner'
   | 'shadowjack'
   | 'path'
-  | undefined;
+  | null;
+
+export type Details =
+  | 'appearance'
+  | 'physical'
+  | 'background'
+  | 'clothing'
+  | 'personality'
+  | 'mannerism';
 
 export interface Character {
   id: string;
@@ -26,14 +34,8 @@ export interface Character {
   };
   health: number;
   feature: Feature;
-  items: {
-    hands: InventoryItem[];
-    worn: InventoryItem[];
-    belt: InventoryItem[];
-    backpack: InventoryItem[];
-    gold: number;
-    unassigned: InventoryItem[];
-  };
+  items: InventoryItem[];
+  gold: number;
   details: {
     appearance: string;
     physical: string;

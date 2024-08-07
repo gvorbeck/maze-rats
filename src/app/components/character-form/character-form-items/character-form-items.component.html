@@ -1,87 +1,66 @@
 <div class="flex gap-4">
   <div>
     <h2>Starting Items</h2>
-    <ul>
+    <ul pDroppable (onDrop)="drop(true)">
       <li
         *ngFor="let item of availableItems"
         pDraggable
         (onDragStart)="dragStart(item)"
         (onDragEnd)="dragEnd()"
       >
-        {{ item.name }}
+        {{ item.name }}<span *ngIf="item.amount"> ({{ item.amount }})</span>
       </li>
     </ul>
   </div>
-  <div>
-    <h2>Combat Gear</h2>
-    <ul>
+  <div pDroppable (onDrop)="drop()" [pDroppableDisabled]="itemsDisabled">
+    <h2>Practice Inventory</h2>
+    <ul class="flex flex-col gap-4">
       <li
-        *ngFor="let item of availableItems"
+        *ngFor="let item of selectedItems"
         pDraggable
         (onDragStart)="dragStart(item)"
         (onDragEnd)="dragEnd()"
+        class="flex gap-2 items-center"
       >
-        {{ item.name }}
+        <span>{{ item.name }}</span>
+        <span *ngIf="item.amount"> ({{ item.amount }})</span>
+        <p-dropdown
+          [options]="dropdownOptions"
+          [(ngModel)]="item.location"
+          (onChange)="onLocationChange(item, $event.value)"
+          placeholder="Select location"
+        ></p-dropdown>
+      </li>
+      <!-- Weapon input fields -->
+      <li class="flex gap-2 items-center">
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="weapon.name"
+          placeholder="Weapon 1 Name"
+        />
+        <p-dropdown
+          [options]="weaponDropdownOptions"
+          [(ngModel)]="weapon.type"
+          placeholder="Type"
+        ></p-dropdown>
+        <p-dropdown
+          [options]="dropdownOptions"
+          [(ngModel)]="weapon.location"
+          placeholder="Location"
+        ></p-dropdown>
+        <p-button
+          label="Add"
+          (onClick)="addWeapon(weapon)"
+          [disabled]="validateWeapon()"
+        ></p-button>
       </li>
     </ul>
   </div>
-  <div>
-    <h2>Character Items</h2>
-    <div>
-      <h3>Hands</h3>
-      <ul pDroppable (onDrop)="drop('hands')" class="bg-slate-600 h-10 w-full">
-        <li
-          *ngFor="let item of handsItems"
-          pDraggable
-          (onDragStart)="dragStart(item)"
-          (onDragEnd)="dragEnd()"
-        >
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Belt</h3>
-      <ul pDroppable (onDrop)="drop('belt')" class="bg-slate-600 h-10 w-full">
-        <li
-          *ngFor="let item of beltItems"
-          pDraggable
-          (onDragStart)="dragStart(item)"
-          (onDragEnd)="dragEnd()"
-        >
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Worn</h3>
-      <ul pDroppable (onDrop)="drop('worn')" class="bg-slate-600 h-10 w-full">
-        <li
-          *ngFor="let item of wornItems"
-          pDraggable
-          (onDragStart)="dragStart(item)"
-          (onDragEnd)="dragEnd()"
-        >
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Backpack</h3>
-      <ul
-        pDroppable
-        (onDrop)="drop('backpack')"
-        class="bg-slate-600 h-10 w-full"
-      >
-        <li
-          *ngFor="let item of backpackItems"
-          pDraggable
-          (onDragStart)="dragStart(item)"
-          (onDragEnd)="dragEnd()"
-        >
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
+  <!-- Display error messages if any -->
+  <div *ngIf="errorMessages.length > 0" class="text-red-500">
+    <ul>
+      <li *ngFor="let error of errorMessages">{{ error }}</li>
+    </ul>
   </div>
 </div>

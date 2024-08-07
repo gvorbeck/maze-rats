@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Type } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
-import { Character, AbilityKey, Feature } from '../../models/character.model';
+import {
+  Character,
+  AbilityKey,
+  Feature,
+  Details,
+} from '../../models/character.model';
 import { CharacterFormAbilitiesComponent } from './character-form-abilities/character-form-abilities.component';
 import { CharacterFormHealthComponent } from './character-form-health/character-form-health.component';
 import { CharacterFormFeatureComponent } from './character-form-feature/character-form-feature.component';
@@ -42,29 +47,23 @@ export class CharacterFormComponent {
       str: {
         long: 'Strength',
         short: 'STR',
-        value: 0,
+        value: null,
       },
       dex: {
         long: 'Dexterity',
         short: 'DEX',
-        value: 0,
+        value: null,
       },
       wil: {
         long: 'Willpower',
         short: 'WIL',
-        value: 0,
+        value: null,
       },
     },
     health: 4,
-    feature: undefined,
-    items: {
-      hands: [],
-      worn: [],
-      belt: [],
-      backpack: [],
-      gold: 0,
-      unassigned: [],
-    },
+    feature: null,
+    items: [],
+    gold: 0,
     details: {
       appearance: '',
       physical: '',
@@ -121,7 +120,7 @@ export class CharacterFormComponent {
       header: 'Name Your Character',
       instruction:
         'Your character starts at level 1 and has 0 XP. Give your character a name.',
-      component: null,
+      component: CharacterFormNameComponent,
       name: 'name',
     },
   ];
@@ -147,26 +146,20 @@ export class CharacterFormComponent {
 
   onFeatureChanged(feature: Feature | 'path') {
     console.log('startingCharacter:', this.startingCharacter);
-    if (feature !== undefined && feature !== 'path') {
+    if (feature === 'path') {
+      this.startingCharacter.feature = null;
+    } else {
       this.startingCharacter.feature = feature;
     }
   }
 
-  onItemsChanged({
-    hands,
-    belt,
-    worn,
-    backpack,
-  }: {
-    hands: InventoryItem[];
-    belt: InventoryItem[];
-    worn: InventoryItem[];
-    backpack: InventoryItem[];
-  }) {
-    this.startingCharacter.items.hands = hands;
-    this.startingCharacter.items.belt = belt;
-    this.startingCharacter.items.worn = worn;
-    this.startingCharacter.items.backpack = backpack;
+  onItemsChanged(items: InventoryItem[]) {
+    this.startingCharacter.items = items;
+    console.log('startingCharacter:', this.startingCharacter);
+  }
+
+  onDetailsChanged(details: { [keyof in Details]: string }) {
+    this.startingCharacter.details = details;
     console.log('startingCharacter:', this.startingCharacter);
   }
 
@@ -174,4 +167,58 @@ export class CharacterFormComponent {
     this.startingCharacter.name = name;
     console.log('startingCharacter:', this.startingCharacter);
   }
+
+  isNextDisabled(panelIndex: number): boolean {
+    const panel = this.stepperPanels[panelIndex];
+    let outcome = false;
+    switch (panel.name) {
+      case 'abilities':
+        outcome =
+          this.startingCharacter.abilities.str.value === null ||
+          this.startingCharacter.abilities.dex.value === null ||
+          this.startingCharacter.abilities.wil.value === null;
+        break;
+      case 'health':
+        outcome =
+          this.startingCharacter.health === 0 ||
+          this.startingCharacter.health === null;
+        break;
+      case 'feature':
+        outcome = this.startingCharacter.feature === null;
+        break;
+      case 'items':
+        const handsSlots = this.getTotalSlots('hands');
+        const beltItems = this.getTotalItems('belt');
+        const noLocationItems = this.startingCharacter.items.some(
+          (item) => item.location === null
+        );
+        outcome = handsSlots > 2 || beltItems > 2 || noLocationItems;
+        break;
+    }
+    return outcome;
+  }
+
+  getTotalSlots(location: string): number {
+    return this.startingCharacter.items
+      .filter((item) => item.location === location)
+      .reduce((total, item) => total + item.slots!, 0);
+  }
+
+  getTotalItems(location: string): number {
+    return this.startingCharacter.items.filter(
+      (item) => item.location === location
+    ).length;
+  }
+
+  // Version 2
+  // With an [appearance] look, [Character Name] carries themselves with a [physical] presence. Coming from a background as a [background], they wear [clothing] attire that complements their [personality] nature. They are known for their [mannerism] way of interacting with others.
+
+  // Version 3
+  // [Character Name]’s [appearance] visage pairs well with their [physical] build, a hallmark of their [background] upbringing. They are usually dressed in [clothing], reflecting a [personality] demeanor. One cannot miss their distinctive [mannerism] mannerisms that define their social interactions.
+
+  // Version 4
+  // The [appearance] look of [Character Name] is matched by their [physical] stature, indicative of their life as a [background]. Their choice of [clothing] attire highlights their [personality] character. Their [mannerism] way of speaking or acting is something many notice.
+
+  // Version 5
+  // [Character Name] boasts an [appearance] look and a [physical] physique, both shaped by their [background]. Their [clothing] is always a nod to their [personality] tendencies. What sets them apart is their [mannerism] habit, making them easily recognizable.
 }

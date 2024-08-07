@@ -1,6 +1,6 @@
 <section>
   <h1>Create a New Character</h1>
-  <p-stepper orientation="vertical">
+  <p-stepper orientation="vertical" [linear]="true">
     <ng-container *ngFor="let panel of stepperPanels; let i = index">
       <p-stepperPanel [header]="panel.header">
         <ng-template
@@ -37,7 +37,9 @@
               />
             </ng-container>
             <ng-container *ngIf="panel.name === 'details'">
-              <app-character-form-details />
+              <app-character-form-details
+                (detailsChanged)="onDetailsChanged($event)"
+              />
             </ng-container>
             <ng-container *ngIf="panel.name === 'name'">
               <app-character-form-name (nameChanged)="onNameChanged($event)" />
@@ -54,6 +56,7 @@
               *ngIf="i < stepperPanels.length - 1"
               label="Next"
               (onClick)="nextCallback.emit()"
+              [disabled]="isNextDisabled(i)"
             />
           </div>
         </ng-template>
