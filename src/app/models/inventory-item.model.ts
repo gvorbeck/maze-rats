@@ -1,5 +1,7 @@
 export type TypeName =
-  | 'weapon'
+  | 'heavy-weapon'
+  | 'light-weapon'
+  | 'ranged-weapon'
   | 'armor'
   | 'item'
   | 'animal'

@@ -14,7 +14,7 @@
   </div>
   <div pDroppable (onDrop)="drop()" [pDroppableDisabled]="itemsDisabled">
     <h2>Practice Inventory</h2>
-    <ul *ngIf="selectedItems.length">
+    <ul>
       <li
         *ngFor="let item of selectedItems"
         pDraggable
@@ -30,6 +30,18 @@
           (onChange)="onLocationChange(item, $event.value)"
           placeholder="Select location"
         ></p-dropdown>
+      </li>
+      <li class="flex gap-2 items-center">
+        <!-- weapon input #1 -->
+        <!-- weapon type dropdown: light, heavy, ranged -->
+        <!-- location dropdown -->
+        <!-- add button -->
+      </li>
+      <li class="flex gap-2 items-center">
+        <!-- weapon input #2 -->
+        <!-- weapon type dropdown: light, heavy, ranged -->
+        <!-- location dropdown -->
+        <!-- add button -->
       </li>
     </ul>
   </div>

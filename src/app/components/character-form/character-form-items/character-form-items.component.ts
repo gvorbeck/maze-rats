@@ -21,6 +21,11 @@ export class CharacterFormItemsComponent {
   itemsDisabled: boolean = false;
   draggedItem: InventoryItem | null = null;
   dropdownOptions: string[] = ['hands', 'belt', 'worn', 'backpack'];
+  weaponDropdownOptions: string[] = [
+    'light-weapon',
+    'heavy-weapon',
+    'ranged-weapon',
+  ];
   errorMessages: string[] = [];
 
   constructor(private inventoryService: InventoryService) {}
@@ -131,5 +136,23 @@ export class CharacterFormItemsComponent {
     if (beltItems > 2) {
       this.errorMessages.push('Cannot assign more than 2 items to belt.');
     }
+  }
+
+  onWeaponAdd(
+    name: string,
+    type: 'light-weapon' | 'heavy-weapon' | 'ranged-weapon',
+    location: 'hands' | 'belt' | 'worn' | 'backpack'
+  ) {
+    const slots = type === 'light-weapon' ? 1 : 2;
+    const damage = type === 'heavy-weapon' ? 1 : 0;
+    const weapon = {
+      name,
+      type,
+      slots,
+      damage,
+      value: null,
+      location,
+    };
+    // add weapon to startingCharacter.items
   }
 }
