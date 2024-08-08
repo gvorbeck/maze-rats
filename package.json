@@ -23,6 +23,7 @@
     "@angular/router": "^18.1.0",
     "@angular/ssr": "^18.1.2",
     "express": "^4.18.2",
+    "firebase": "^10.12.5",
     "firebase-tools": "^13.15.0",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.6",

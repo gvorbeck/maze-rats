@@ -1,42 +1,32 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from './auth.service';
 import { Character } from '../models/character.model';
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterService {
-  private characters: Character[] = [];
+  constructor(
+    private firestore: AngularFirestore,
+    private authService: AuthService
+  ) {}
 
-  constructor() {}
-
-  // Read: Get all characters
-  getCharacters(): Observable<Character[]> {
-    return of(this.characters);
+  getUserCharacters(userId: string) {
+    return this.firestore
+      .collection('characters', (ref) => ref.where('userId', '==', userId))
+      .snapshotChanges();
   }
 
-  // Read: Get a single character by ID
-  getCharacter(id: string): Observable<Character | undefined> {
-    return of(this.characters.find((character) => character.id === id));
+  createCharacter(character: Character) {
+    return this.firestore.collection('characters').add(character);
   }
 
-  // Create: Add a new character
-  addCharacter(character: Character): void {
-    this.characters.push(character);
+  updateCharacter(id: string, character: Character) {
+    return this.firestore.collection('characters').doc(id).update(character);
   }
 
-  // Update: Modify an existing character
-  updateCharacter(character: Character): void {
-    const index = this.characters.findIndex((c) => c.id === character.id);
-    if (index !== -1) {
-      this.characters[index] = character;
-    }
-  }
-
-  // Delete: Remove a character by ID
-  deleteCharacter(id: string): void {
-    this.characters = this.characters.filter(
-      (character) => character.id !== id
-    );
+  deleteCharacter(id: string) {
+    return this.firestore.collection('characters').doc(id).delete();
   }
 }

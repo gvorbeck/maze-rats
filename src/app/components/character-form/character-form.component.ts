@@ -15,6 +15,8 @@ import { CharacterFormItemsComponent } from './character-form-items/character-fo
 import { InventoryItem } from '../../models/inventory-item.model';
 import { CharacterFormDetailsComponent } from './character-form-details/character-form-details.component';
 import { CharacterFormNameComponent } from './character-form-name/character-form-name.component';
+import { AuthService } from '../../services/auth.service';
+import { CharacterService } from '../../services/character.service';
 
 interface CharacterStepperPanel {
   header: string;
@@ -80,6 +82,11 @@ export class CharacterFormComponent {
       spells: [],
     },
   };
+
+  constructor(
+    private authService: AuthService,
+    private characterService: CharacterService
+  ) {}
 
   stepperPanels: CharacterStepperPanel[] = [
     {
@@ -208,6 +215,17 @@ export class CharacterFormComponent {
     return this.startingCharacter.items.filter(
       (item) => item.location === location
     ).length;
+  }
+
+  saveCharacter() {
+    this.authService.getAuthState().subscribe((user) => {
+      if (user) {
+        const newCharacter = { ...this.startingCharacter, userId: user.uid };
+        this.characterService.createCharacter(newCharacter).then(() => {
+          console.log('Character saved successfully');
+        });
+      }
+    });
   }
 
   // Version 2
