@@ -10,6 +10,14 @@
       </li>
     </ul>
   </nav>
+  <div class="container" style="padding: 50px 0 100px 0">
+    <div *ngIf="session; else loggedOut">
+      <app-account [session]="session"></app-account>
+    </div>
+    <ng-template #loggedOut>
+      <app-auth></app-auth>
+    </ng-template>
+  </div>
   <router-outlet />
 </main>
 
