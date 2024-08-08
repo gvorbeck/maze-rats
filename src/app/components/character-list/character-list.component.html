@@ -1,1 +1,29 @@
-<p>character-list works!</p>
+<div *ngIf="characters.length > 0; else noCharacters">
+  <p-card [header]="character.name" *ngFor="let character of characters">
+    <dl>
+      <dt>Level:</dt>
+      <dd>{{ character.level }}</dd>
+      <dt>XP:</dt>
+      <dd>{{ character.xp }}</dd>
+    </dl>
+  </p-card>
+  <!-- <h3>{{ character.name }}</h3>
+      <p>Level: {{ character.level }}</p>
+      <p>XP: {{ character.xp }}</p>
+      <p>Health: {{ character.health }}</p>
+      <p>Gold: {{ character.gold }}</p>
+      <p>Feature: {{ character.feature }}</p>
+      <p>Details:</p>
+      <ul>
+        <li>Appearance: {{ character.details.appearance }}</li>
+        <li>Physical: {{ character.details.physical }}</li>
+        <li>Background: {{ character.details.background }}</li>
+        <li>Clothing: {{ character.details.clothing }}</li>
+        <li>Personality: {{ character.details.personality }}</li>
+        <li>Mannerism: {{ character.details.mannerism }}</li>
+      </ul> -->
+</div>
+
+<ng-template #noCharacters>
+  <p>No characters available. Please create a new character.</p>
+</ng-template>

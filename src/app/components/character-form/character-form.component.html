@@ -58,6 +58,11 @@
               (onClick)="nextCallback.emit()"
               [disabled]="isNextDisabled(i)"
             />
+            <p-button
+              *ngIf="i === stepperPanels.length - 1"
+              label="Submit"
+              (onClick)="saveCharacter()"
+            />
           </div>
         </ng-template>
       </p-stepperPanel>

@@ -210,6 +210,24 @@ export class CharacterFormComponent {
     ).length;
   }
 
+  saveCharacter() {
+    console.log('Character:', this.startingCharacter);
+
+    // Retrieve existing characters from local storage
+    const storedCharacters = localStorage.getItem('characters');
+
+    // Parse the stored characters or initialize an empty array if null
+    const characters: Character[] = storedCharacters
+      ? JSON.parse(storedCharacters)
+      : [];
+
+    // Add the new character to the list
+    characters.push(this.startingCharacter);
+
+    // Save the updated list back to local storage
+    localStorage.setItem('characters', JSON.stringify(characters));
+  }
+
   // Version 2
   // With an [appearance] look, [Character Name] carries themselves with a [physical] presence. Coming from a background as a [background], they wear [clothing] attire that complements their [personality] nature. They are known for their [mannerism] way of interacting with others.
 
