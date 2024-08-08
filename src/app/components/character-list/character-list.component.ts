@@ -18,9 +18,13 @@ export class CharacterListComponent implements OnInit {
   }
 
   loadCharacters() {
-    const storedCharacters = localStorage.getItem('characters');
-    if (storedCharacters) {
-      this.characters = JSON.parse(storedCharacters);
+    if (typeof window !== 'undefined' && localStorage) {
+      const storedCharacters = localStorage.getItem('characters');
+      if (storedCharacters) {
+        this.characters = JSON.parse(storedCharacters);
+      }
+    } else {
+      console.warn('localStorage is not available');
     }
   }
 }
